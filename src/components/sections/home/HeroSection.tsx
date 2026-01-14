@@ -174,8 +174,11 @@ const HeroSection: React.FC = () => {
             }`}
             onError={handleVideoError}
           >
-            <source src="/static/videos/video.mp4" type="video/quicktime" />
-            <source src="/static/videos/video.mp4" type="video/mp4" />
+            <source
+              src="/static/videos/video-optimized-720p.mp4"
+              type="video/mp4"
+            />
+            <source src="/static/videos/video-optimized.mp4" type="video/mp4" />
             Seu navegador não suporta reprodução de vídeo.
           </video>
         )}
