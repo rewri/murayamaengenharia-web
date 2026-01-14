@@ -4,7 +4,7 @@ Site institucional da Murayama Engenharia, apresentando serviços, projetos e in
 
 ## 🚀 Tecnologias
 
-- **React 19** - Biblioteca JavaScript para interfaces
+- **React 18** - Biblioteca JavaScript para interfaces
 - **TypeScript** - Superset tipado do JavaScript
 - **Vite** - Build tool e dev server
 - **Tailwind CSS** - Framework CSS utility-first
