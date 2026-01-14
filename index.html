@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <meta name="google-site-verification" content="XXXXXXXX" />
+
+    <!-- SEO Base (aparece no View Source) -->
+    <title>Murayama Engenharia - Engenharia e Gestão de Obras</title>
+    <meta
+      name="description"
+      content="Engenharia, gestão e execução de obras com excelência. Especialistas em projetos estruturais e gerenciamento de construções."
+    />
+
+    <!-- Open Graph Base -->
+    <meta
+      property="og:title"
+      content="Murayama Engenharia - Engenharia e Gestão de Obras"
+    />
+    <meta
+      property="og:description"
+      content="Engenharia, gestão e execução de obras com excelência. Especialistas em projetos estruturais e gerenciamento de construções."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og-image.jpg" />
+
+    <!-- Twitter Cards Base -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Murayama Engenharia - Engenharia e Gestão de Obras"
+    />
+    <meta
+      name="twitter:description"
+      content="Engenharia, gestão e execução de obras com excelência."
+    />
+    <meta name="twitter:image" content="/og-image.jpg" />
+
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=%VITE_GA_ID%"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "%VITE_GA_ID%", {
+        page_path: window.location.pathname,
+      });
+    </script>
+  </body>
+</html>
