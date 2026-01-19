@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { navigationItems } from "../../config/navigation";
 
 export function Header() {
@@ -35,29 +35,29 @@ export function Header() {
             {menuItems.map((item) => {
               const active = isActive(item.href);
               return (
-                <motion.a
-                  key={item.label}
-                  href={item.href}
-                  whileHover={{
-                    textShadow: "0.5px 0 0 currentColor",
-                  }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
-                  className={`relative transition-colors antialiased text-sm font-semibold font-body ${
-                    active
-                      ? "text-primary font-bold"
-                      : "text-neutral-dark hover:text-primary"
-                  }`}
-                >
-                  {item.label}
-                  {active && (
-                    <motion.div
-                      layoutId="activeIndicator"
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent"
-                      initial={false}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                    />
-                  )}
-                </motion.a>
+                <Link key={item.label} to={item.href}>
+                  <motion.div
+                    whileHover={{
+                      textShadow: "0.5px 0 0 currentColor",
+                    }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    className={`relative transition-colors antialiased text-sm font-semibold font-body ${
+                      active
+                        ? "text-primary font-bold"
+                        : "text-neutral-dark hover:text-primary"
+                    }`}
+                  >
+                    {item.label}
+                    {active && (
+                      <motion.div
+                        layoutId="activeIndicator"
+                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent"
+                        initial={false}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                      />
+                    )}
+                  </motion.div>
+                </Link>
               );
             })}
           </nav>
@@ -91,26 +91,29 @@ export function Header() {
               {menuItems.map((item, index) => {
                 const active = isActive(item.href);
                 return (
-                  <motion.a
+                  <Link
                     key={item.label}
-                    href={item.href}
-                    initial={{ x: -8, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ duration: 0.2, delay: index * 0.1 }}
-                    whileHover={{
-                      x: 4,
-                      textShadow: "0.5px 0 0 currentColor",
-                    }}
-                    whileTap={{ scale: 0.95 }}
+                    to={item.href}
                     onClick={() => setOpen(false)}
-                    className={`transition-colors antialiased font-body ${
-                      active
-                        ? "text-primary font-bold border-l-2 border-accent pl-3"
-                        : "text-neutral-dark hover:text-primary"
-                    }`}
                   >
-                    {item.label}
-                  </motion.a>
+                    <motion.div
+                      initial={{ x: -8, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ duration: 0.2, delay: index * 0.1 }}
+                      whileHover={{
+                        x: 4,
+                        textShadow: "0.5px 0 0 currentColor",
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`transition-colors antialiased font-body ${
+                        active
+                          ? "text-primary font-bold border-l-2 border-accent pl-3"
+                          : "text-neutral-dark hover:text-primary"
+                      }`}
+                    >
+                      {item.label}
+                    </motion.div>
+                  </Link>
                 );
               })}
               <motion.a

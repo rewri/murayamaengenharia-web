@@ -24,13 +24,13 @@ export function FloatingBudgetButton() {
   };
 
   return (
-    <div className="fixed right-6 z-50" style={{ bottom: "90px" }}>
+    <div className="fixed left-6 z-50" style={{ bottom: "80px" }}>
       <button
-        className="bg-accent-600 hover:bg-accent-700 text-white rounded-full p-4 shadow-lg transition-all duration-300 ease-in-out transform hover:scale-110"
+        className="bg-accent-600 hover:bg-accent-700 text-white rounded-full p-2 md:p-3 opacity-80 hover:opacity-100 shadow-lg transition-all duration-300 ease-in-out transform hover:scale-110"
         aria-label="Solicitar Orçamento"
         onClick={scrollToChatbot}
       >
-        <Handshake className="w-6 h-6" />
+        <Handshake className="w-8 h-8 md:w-10 md:h-10" />
       </button>
     </div>
   );

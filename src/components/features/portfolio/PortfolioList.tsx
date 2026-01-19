@@ -52,6 +52,7 @@ export default function PortfolioList() {
             return (
               <motion.div key={project.image + idx} variants={fadeUp}>
                 <PortfolioCard
+                  id={project.id}
                   title={project.title}
                   location={project.location}
                   image={project.image}

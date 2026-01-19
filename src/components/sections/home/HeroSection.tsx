@@ -138,7 +138,7 @@ const HeroSection: React.FC = () => {
     <section
       id="home"
       className={`relative w-full overflow-hidden flex items-center bg-gradient-to-br from-primary-600 to-accent-500 ${
-        isMobile ? "h-[55vh] pt-30" : "h-[60vh]"
+        isMobile ? "h-[65vh] pt-30" : "h-[60vh]"
       }`}
     >
       <div className="absolute inset-0 z-10">

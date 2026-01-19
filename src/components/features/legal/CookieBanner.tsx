@@ -21,7 +21,7 @@ export function CookieBanner() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed bottom-4 left-4 w-full max-w-[420px] md:w-[420px]
+          className="fixed bottom-4 right-4 w-full max-w-[420px] md:w-[420px]
                      bg-white border border-neutral-warm shadow-lg rounded-lg p-4 z-50"
         >
           <p className="text-sm text-neutral-dark mb-4 font-body">

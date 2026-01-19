@@ -2,6 +2,7 @@ import { ZoomIn } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface PortfolioCardProps {
+  id: string;
   title: string;
   location: string;
   image: string;
@@ -9,16 +10,22 @@ interface PortfolioCardProps {
 }
 
 export default function PortfolioCard({
+  id,
   title,
   location,
   image,
   category,
 }: PortfolioCardProps) {
   const navigate = useNavigate();
-  const slug = title.toLowerCase().replace(/\s+/g, "-");
+  const slug = title
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-");
+  const url = `/obras/${slug}-${id}`;
   return (
     <a
-      onClick={() => navigate("/obras/" + slug)}
+      onClick={() => navigate(url)}
       className="flex h-full flex-1 flex-col gap-4 rounded-xl bg-white dark:bg-gray-800/50 shadow-sm border border-gray-200 dark:border-gray-800 transition-all duration-500 hover:shadow-lg hover:shadow-primary/15 focus:outline-none focus:ring-2 focus:ring-primary/40 cursor-pointer no-underline"
       tabIndex={0}
       aria-label={`Ver detalhes do projeto ${title}`}
@@ -68,7 +75,7 @@ export default function PortfolioCard({
         </div>
         <span
           className="flex w-full min-w-[84px] max-w-[480px] items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-100 dark:bg-gray-700 text-[#111418] dark:text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors cursor-pointer"
-          onClick={() => navigate("/obras/" + slug)}
+          onClick={() => navigate(url)}
         >
           <span className="truncate uppercase">Ver Detalhes</span>
         </span>
