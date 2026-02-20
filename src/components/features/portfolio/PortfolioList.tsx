@@ -38,7 +38,7 @@ export default function PortfolioList() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8"
       >
         {Array.isArray(projectsMock) && projectsMock.length > 0 ? (
           projectsMock.map((project, idx) => {

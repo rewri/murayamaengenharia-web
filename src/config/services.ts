@@ -1,53 +1,43 @@
-import {
-  Droplets,
-  Flame,
-  HousePlus,
-  PencilRuler,
-  Wind,
-  Zap,
-} from "lucide-react";
+import { HardHat, HousePlus, PencilRuler } from "lucide-react";
 
 export const servicesList = [
   {
     key: "gestao",
     title: "Gestão de Obras",
     description:
-      "Planejamento, acompanhamento e controle da execução para garantir prazo, custo e qualidade",
-    icon: HousePlus,
+      "Planejamento estratégico e acompanhamento rigoroso para garantir a melhor execução",
+    icon: HardHat,
+    highlights: [
+      "Controle de prazos",
+      "Otimização de custos",
+      "Garantia de qualidade",
+      "Conformidade ABNT",
+    ],
   },
   {
-    key: "arquitetonico",
-    title: "Projeto Arquitetônico",
+    key: "laudos",
+    title: "Inspeções e Laudos",
     description:
-      "Plantas baixas, cortes, fachadas e detalhamentos completos para sua edificação",
+      "Avaliações técnicas detalhadas para garantir segurança e conformidade legal",
     icon: PencilRuler,
+    highlights: [
+      "Laudos Periciais",
+      "Vistorias Cautelares",
+      "Conformidade Normativa",
+      "Inspeção e Classificação de Risco",
+    ],
   },
   {
-    key: "estrutural",
-    title: "Projeto Estrutural",
+    key: "complementares",
+    title: "Projetos Complementares",
     description:
-      "Dimensionamento e detalhamento da estrutura para garantir segurança, estabilidade e desempenho",
-    icon: Wind,
-  },
-  {
-    key: "hidrossanitario",
-    title: "Projeto Hidrossanitário",
-    description:
-      "Soluções de água, esgoto e drenagem, assegurando funcionamento eficiente e conforme normas",
-    icon: Droplets,
-  },
-  {
-    key: "eletrico",
-    title: "Projeto Elétrico",
-    description:
-      "Distribuição de energia, iluminação e pontos elétricos com segurança, eficiência e conformidade técnica",
-    icon: Zap,
-  },
-  {
-    key: "incendio",
-    title: "Projeto de Combate a Incêndio",
-    description:
-      "Medidas de prevenção e proteção contra incêndio, atendendo às exigências legais e de segurança",
-    icon: Flame,
+      "Soluções integradas de arquitetura e engenharia para obras complexas",
+    icon: HousePlus,
+    highlights: [
+      "Projeto Arquitetônico e Regularização",
+      "PPCI — Prevenção e Combate a Incêndio",
+      "Hidrossanitário e Drenagem Pluvial",
+      "Instalações Elétricas e Aterramento",
+    ],
   },
 ];

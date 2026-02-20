@@ -31,11 +31,6 @@ export default function PartnersCarousel() {
 
   return (
     <section className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-transparent py-8 md:py-16 pb-8 md:pb-4">
-      <div className="text-center mb-16">
-        <h2 className="text-2xl md:text-2xl font-light text-neutral-dark mb-20">
-          Nossos clientes e parceiros
-        </h2>
-      </div>
       <div className="relative">
         <div className="absolute left-0 top-0 bottom-0 w-36 bg-gradient-to-r from-background-light to-transparent z-10 pointer-events-none" />
         <div

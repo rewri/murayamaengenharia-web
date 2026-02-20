@@ -1,3 +1,4 @@
+import TestimonialsSection from "../../components/sections/about/TestimonialsSection";
 import CtaSection from "../../components/sections/home/CtaSection";
 import HeroSection from "../../components/sections/home/HeroSection";
 import PartnersSection from "../../components/sections/home/PartnersSection";
@@ -15,6 +16,11 @@ export function HomePage() {
         </div>
       </section>
       <CtaSection />
+      <section className="w-full py-8 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <TestimonialsSection />
+        </div>
+      </section>
       <PartnersSection />
     </>
   );

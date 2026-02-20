@@ -1,4 +1,4 @@
-import { ZoomIn } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface PortfolioCardProps {
@@ -26,13 +26,13 @@ export default function PortfolioCard({
   return (
     <a
       onClick={() => navigate(url)}
-      className="flex h-full flex-1 flex-col gap-4 rounded-xl bg-white dark:bg-gray-800/50 shadow-sm border border-gray-200 dark:border-gray-800 transition-all duration-500 hover:shadow-lg hover:shadow-primary/15 focus:outline-none focus:ring-2 focus:ring-primary/40 cursor-pointer no-underline"
+      className="flex h-full flex-1 flex-col rounded-xl overflow-hidden bg-white dark:bg-gray-800/50 shadow-sm border border-gray-200 dark:border-gray-800 transition-all duration-500 hover:shadow-lg hover:shadow-primary/15 focus:outline-none focus:ring-2 focus:ring-primary/40 cursor-pointer no-underline group"
       tabIndex={0}
       aria-label={`Ver detalhes do projeto ${title}`}
     >
-      <div className="w-full aspect-video rounded-t-xl overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-stretch justify-center relative group">
+      <div className="w-full aspect-video relative overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-stretch justify-center">
         <span
-          className="absolute uppercase top-3 left-3 z-10 px-3 py-1 rounded-md backdrop-blur bg-white/70 border-1 dark:bg-gray-900/60 text-xs font-normal text-secondary dark:text-gray-100 "
+          className="absolute uppercase top-3 left-3 z-20 px-3 py-1 rounded-md bg-primary text-white font-bold border-1 dark:bg-gray-900/60 text-xs dark:text-gray-100"
           style={{ pointerEvents: "none" }}
         >
           {category}
@@ -56,29 +56,31 @@ export default function PortfolioCard({
             }}
           />
         </picture>
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center rounded-t-xl">
-          <ZoomIn
-            size={60}
-            className="text-white opacity-0 group-hover:opacity-50 transition-opacity duration-300"
-            strokeWidth={2}
-          />
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+        <div className="absolute inset-x-0 bottom-0 z-10">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+          <div className="relative p-4 flex items-end justify-between">
+            <div className="flex-1 transform group-hover:translate-y-[-8px] transition-transform duration-300">
+              <p className="text-white font-bold leading-tight text-left text-xl">
+                {title}
+              </p>
+              <p className="text-gray-100 text-sm leading-tight flex items-center gap-1 mt-2">
+                <MapPin size={16} /> {location}
+              </p>
+            </div>
+            <a
+              href={url}
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate(url);
+              }}
+              className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-3 py-1.5 bg-white hover:bg-gray-100 text-secondary font-bold text-xs rounded-md whitespace-nowrap flex-shrink-0"
+              style={{ pointerEvents: "auto" }}
+            >
+              VER DETALHES
+            </a>
+          </div>
         </div>
-      </div>
-      <div className="flex flex-col flex-1 justify-between p-6 pt-0 gap-4 text-left">
-        <div>
-          <p className="text-[#111418] dark:text-white text-base font-bold leading-normal">
-            {title}
-          </p>
-          <p className="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">
-            {location}
-          </p>
-        </div>
-        <span
-          className="flex w-full min-w-[84px] max-w-[480px] items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-100 dark:bg-gray-700 text-[#111418] dark:text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors cursor-pointer"
-          onClick={() => navigate(url)}
-        >
-          <span className="truncate uppercase">Ver Detalhes</span>
-        </span>
       </div>
     </a>
   );
