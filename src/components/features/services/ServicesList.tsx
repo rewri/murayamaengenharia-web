@@ -14,16 +14,6 @@ export default function ServicesList() {
         viewport={{ once: true, amount: 0.2 }}
         className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
       >
-        {/* {servicesList.map((service, index) => (
-          <motion.div key={service.title} variants={fadeUp}>
-            <ServiceCard
-              index={index}
-              title={service.title}
-              description={service.description}
-              icon={React.createElement(service.icon)}
-            />
-          </motion.div>
-        ))} */}
         {servicesList.map((service, index) => (
           <motion.div key={service.title} variants={fadeUp}>
             <ServiceCard

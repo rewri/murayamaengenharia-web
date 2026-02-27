@@ -10,7 +10,7 @@ export default function PartnersCarousel() {
     if (!scrollContainer) return;
 
     let scrollPosition = 0;
-    const scrollSpeed = 0.5;
+    const scrollSpeed = 2;
 
     // Calcular a metade do scroll width para reset suave
     const halfScrollWidth = scrollContainer.scrollWidth / 2;

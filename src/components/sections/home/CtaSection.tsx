@@ -2,7 +2,10 @@ import { Handshake } from "lucide-react";
 
 export default function CtaSection() {
   return (
-    <div className="w-full bg-sky-950 py-8 md:py-20">
+    <div
+      className="w-full bg-primary py-8 md:py-20"
+      style={{ borderBottom: "5px solid #F4F4F4" }}
+    >
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
           <div className="flex-shrink-0">

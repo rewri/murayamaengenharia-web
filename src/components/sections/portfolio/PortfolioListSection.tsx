@@ -26,7 +26,7 @@ export default function PortfolioListSection() {
     }
 
     return allConstructions.filter(
-      (construction) => construction.category === selectedCategory
+      (construction) => construction.category === selectedCategory,
     );
   }, [selectedCategory]);
 
@@ -92,7 +92,7 @@ export default function PortfolioListSection() {
             variants={stagger}
             initial="hidden"
             animate="visible"
-            className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-8"
+            className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-8 mb-8"
           >
             {currentConstructions.map((project, idx) => (
               <motion.div key={project.image + idx} variants={fadeUp}>
@@ -142,7 +142,7 @@ export default function PortfolioListSection() {
                     >
                       <span className="text-sm font-medium">{page}</span>
                     </button>
-                  )
+                  ),
                 )}
               </div>
 

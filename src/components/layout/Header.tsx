@@ -65,7 +65,7 @@ export function Header() {
             href="#chatbot"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-accent-600 text-white px-4 py-1.5 rounded text-sm font-medium hover:bg-accent-700 transition-colors shadow-md antialiased font-body"
+            className="bg-secondary text-white px-4 py-1.5 rounded text-sm font-medium hover:bg-accent-700 transition-colors shadow-md antialiased font-body"
           >
             SOLICITE UM ORÇAMENTO
           </motion.a>

@@ -1,4 +1,11 @@
-import { HardHat, HousePlus, PencilRuler } from "lucide-react";
+import {
+  DraftingCompass,
+  Flame,
+  HardHat,
+  HousePlus,
+  PencilRuler,
+  Wrench,
+} from "lucide-react";
 
 export const servicesList = [
   {
@@ -8,9 +15,8 @@ export const servicesList = [
       "Planejamento estratégico e acompanhamento rigoroso para garantir a melhor execução",
     icon: HardHat,
     highlights: [
-      "Controle de prazos",
-      "Otimização de custos",
-      "Garantia de qualidade",
+      "Controle de Prazos e Custos",
+      "Garantia de Qualidade",
       "Conformidade ABNT",
     ],
   },
@@ -21,9 +27,8 @@ export const servicesList = [
       "Avaliações técnicas detalhadas para garantir segurança e conformidade legal",
     icon: PencilRuler,
     highlights: [
-      "Laudos Periciais",
+      "Laudos Periciais e Normativos",
       "Vistorias Cautelares",
-      "Conformidade Normativa",
       "Inspeção e Classificação de Risco",
     ],
   },
@@ -34,10 +39,45 @@ export const servicesList = [
       "Soluções integradas de arquitetura e engenharia para obras complexas",
     icon: HousePlus,
     highlights: [
-      "Projeto Arquitetônico e Regularização",
-      "PPCI — Prevenção e Combate a Incêndio",
-      "Hidrossanitário e Drenagem Pluvial",
-      "Instalações Elétricas e Aterramento",
+      "Projeto Estrutural",
+      "Projeto Elétrico",
+      "Projeto Hidrossanitário",
+    ],
+  },
+  {
+    key: "arquitetonico",
+    title: "Projeto Arquitetônico",
+    description:
+      "Soluções arquitetônicas funcionais, estéticas e alinhadas às normas técnicas e legislação vigente",
+    icon: DraftingCompass,
+    highlights: [
+      "Estudo Preliminar e Anteprojeto",
+      "Projeto Legal para Aprovação",
+      "Compatibilização com Projetos Complementares",
+    ],
+  },
+  {
+    key: "incendio",
+    title: "Projeto de Combate a Incêndio",
+    description:
+      "Desenvolvimento de sistemas preventivos e de proteção contra incêndio conforme normas técnicas",
+    icon: Flame,
+    highlights: [
+      "Adequação às Exigências do Corpo de Bombeiros",
+      "Dimensionamento de Hidrantes e Extintores",
+      "Sinalização e Rotas de Fuga",
+    ],
+  },
+  {
+    key: "manutencao",
+    title: "Manutenção e Conservação Predial",
+    description:
+      "Disponibilização de profissionais especializados para atuar diretamente na empresa contratante",
+    icon: Wrench,
+    highlights: [
+      "Alocação de Profissionais Especializados",
+      "Manutenção Preventiva e Corretiva",
+      "Execução Contínua de Serviços Prediais",
     ],
   },
 ];

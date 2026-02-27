@@ -1,26 +1,10 @@
-/**
- * Lista de sponsors
- *
- * As imagens devem estar em: public/static/images/sponsors/
- * Nomeadas consistentemente com o padrão: [filename].png ou .jpg
- *
- * Para adicionar um novo sponsor:
- * 1. Coloque a imagem (PNG/JPG) em public/static/images/sponsors/
- * 2. Nomeie como: seu-nome.png (use kebab-case)
- * 3. Adicione aqui: { name: "Seu Nome", filename: "seu-nome", ext: "png" }
- *
- * Para remover um sponsor:
- * 1. Delete a imagem do diretório
- * 2. Remova a entrada abaixo
- */
-
-interface Sponsor {
+interface Partner {
   name: string;
   filename: string;
   ext: "png" | "jpg";
 }
 
-const sponsorsList: Sponsor[] = [
+const partnersList: Partner[] = [
   { name: "AAF", filename: "aaf", ext: "png" },
   { name: "Caio", filename: "caio", ext: "png" },
   { name: "Central Bela Vista", filename: "central_bela_vista", ext: "png" },
@@ -36,15 +20,12 @@ const sponsorsList: Sponsor[] = [
   },
   { name: "Rotary", filename: "rotary", ext: "png" },
   { name: "SABESP", filename: "sabesp", ext: "png" },
-  { name: "Seguralta", filename: "seguralta", ext: "jpg" },
+  { name: "Seguralta", filename: "seguralta", ext: "png" },
   { name: "Shopping Botucatu", filename: "shopping_botucatu", ext: "png" },
   { name: "Taky RRV", filename: "taky_rrv", ext: "png" },
 ];
 
-/**
- * Mapeia para os caminhos das imagens
- */
-export const partners = sponsorsList.map((sponsor) => ({
+export const partners = partnersList.map((sponsor) => ({
   name: sponsor.name,
-  src: `/static/images/sponsors/${sponsor.filename}.${sponsor.ext}`,
+  src: `/static/images/partners/${sponsor.filename}.${sponsor.ext}`,
 }));
