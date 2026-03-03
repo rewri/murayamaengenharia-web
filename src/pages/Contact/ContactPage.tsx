@@ -12,17 +12,17 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 pb-0">
           <HeroSection />
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-16 md:mb-24">
-            <div className="md:col-span-4">
-              <GoogleRatingSection />
-            </div>
-            <div className="md:col-span-8">
-              <FaqSection />
-            </div>
             <div className="md:col-span-5">
               <InfoSection />
             </div>
             <div className="md:col-span-7">
               <MapsSection />
+            </div>
+            <div className="md:col-span-4">
+              <GoogleRatingSection />
+            </div>
+            <div className="md:col-span-8">
+              <FaqSection />
             </div>
           </div>
         </div>

@@ -23,11 +23,24 @@ export default function PortfolioCard({
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/\s+/g, "-");
   const url = `/obras/${slug}-${id}`;
+
+  // Map category names to directory names
+  const categoryMap: Record<string, string> = {
+    Comercial: "COMERCIAIS",
+    Residencial: "RESIDENCIAIS",
+    Industrial: "INDUSTRIAIS",
+    Governamental: "GOVERNAMENTAIS",
+    Momentum: "MOMENTUM",
+    "Projetos 3D": "PROJETOS_3D",
+  };
+
+  const categoryDir = categoryMap[category] || category.toUpperCase();
   return (
-    <a
+    <div
       onClick={() => navigate(url)}
-      className="flex h-full flex-1 flex-col rounded-xl overflow-hidden bg-white dark:bg-gray-800/50 shadow-sm border border-gray-200 dark:border-gray-800 transition-all duration-500 hover:shadow-lg hover:shadow-primary/15 focus:outline-none focus:ring-2 focus:ring-primary/40 cursor-pointer no-underline group"
+      className="flex h-full flex-1 flex-col rounded-xl overflow-hidden bg-white dark:bg-gray-800/50 shadow-sm border border-gray-200 dark:border-gray-800 transition-all duration-500 hover:shadow-lg hover:shadow-primary/15 focus:outline-none focus:ring-2 focus:ring-primary/40 cursor-pointer group"
       tabIndex={0}
+      role="button"
       aria-label={`Ver detalhes do projeto ${title}`}
     >
       <div className="w-full aspect-video relative overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-stretch justify-center">
@@ -37,13 +50,13 @@ export default function PortfolioCard({
         >
           {category}
         </span>
-        <picture className="w-full h-full block">
+        <picture className="w-full h-full block group-hover:scale-105 transition-transform duration-300">
           <source
-            srcSet={`/static/images/projects/webp/thumbs/${image}/thumb.webp`}
+            srcSet={`/static/images/porfolio/${categoryDir}/${image}/${image}-thumb.webp`}
             type="image/webp"
           />
           <img
-            src={`/static/images/projects/fallback/thumbs/${image}/thumb.jpg`}
+            src={`/static/images/porfolio/${categoryDir}/${image}/${image}-thumb.webp`}
             alt={title}
             loading="lazy"
             className="w-full h-full object-cover block"
@@ -60,7 +73,7 @@ export default function PortfolioCard({
         <div className="absolute inset-x-0 bottom-0 z-10">
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
           <div className="relative p-4 flex items-end justify-between">
-            <div className="flex-1 transform group-hover:translate-y-[-8px] transition-transform duration-300">
+            <div className="flex-1">
               <p className="text-white font-bold leading-tight text-left text-xl">
                 {title}
               </p>
@@ -68,20 +81,15 @@ export default function PortfolioCard({
                 <MapPin size={16} /> {location}
               </p>
             </div>
-            <a
-              href={url}
-              onClick={(e) => {
-                e.stopPropagation();
-                navigate(url);
-              }}
+            <span
               className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-3 py-1.5 bg-white hover:bg-gray-100 text-secondary font-bold text-xs rounded-md whitespace-nowrap flex-shrink-0"
-              style={{ pointerEvents: "auto" }}
+              style={{ pointerEvents: "none" }}
             >
               VER DETALHES
-            </a>
+            </span>
           </div>
         </div>
       </div>
-    </a>
+    </div>
   );
 }

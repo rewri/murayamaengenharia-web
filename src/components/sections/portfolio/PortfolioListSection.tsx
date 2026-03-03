@@ -9,10 +9,12 @@ const ITEMS_PER_PAGE = 6;
 
 const categories = [
   "Todos",
-  "Residencial",
   "Comercial",
+  "Residencial",
   "Industrial",
-  "Infraestrutura",
+  "Governamental",
+  "Momentum",
+  "Projetos 3D",
 ];
 
 export default function PortfolioListSection() {
