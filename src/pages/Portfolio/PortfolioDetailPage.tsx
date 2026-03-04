@@ -10,7 +10,7 @@ export default function PortfolioDetailPage() {
 
   // Encontrar a obra pelo ID
   const project = allConstructions.find(
-    (construction) => construction.id === id
+    (construction) => construction.id === id,
   );
 
   // Se não encontrar o projeto, redirecionar para a página de obras
@@ -24,6 +24,11 @@ export default function PortfolioDetailPage() {
       location={project.location}
       category={project.category}
       image={project.image}
+      description={project.description}
+      client={project.client}
+      completionYear={project.conclusion_year}
+      area={project.area}
+      services={project.services}
     />
   );
 }

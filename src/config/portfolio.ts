@@ -6,6 +6,12 @@ export const allConstructions = [
     location: "Botucatu, SP",
     image: "clinica",
     category: "Comercial",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "Clínica",
+    conclusion_year: 2026,
+    area: "N/A",
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },
   {
     id: "2",
@@ -13,6 +19,12 @@ export const allConstructions = [
     location: "Botucatu, SP",
     image: "clinica_odontologica",
     category: "Comercial",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "Clínica Odontológica",
+    conclusion_year: 2026,
+    area: "N/A",
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },
   {
     id: "3",
@@ -20,6 +32,12 @@ export const allConstructions = [
     location: "Botucatu, SP",
     image: "salas_comerciais_e_lojas",
     category: "Comercial",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "Salas Comerciais e Lojas",
+    conclusion_year: 2026,
+    area: "N/A",
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },
   // RESIDENCIAIS
   {
@@ -28,6 +46,12 @@ export const allConstructions = [
     location: "Botucatu, SP",
     image: "outros_botucatu",
     category: "Residencial",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "Outros Botucatu",
+    conclusion_year: 2026,
+    area: "N/A",
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },
   {
     id: "5",
@@ -35,6 +59,12 @@ export const allConstructions = [
     location: "Botucatu, SP",
     image: "parque_das_cascatas",
     category: "Residencial",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "Parque das Cascatas",
+    conclusion_year: 2026,
+    area: "N/A",
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },
   {
     id: "6",
@@ -42,6 +72,12 @@ export const allConstructions = [
     location: "Botucatu, SP",
     image: "parque_laguna",
     category: "Residencial",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "Parque Laguna",
+    conclusion_year: 2026,
+    area: "N/A",
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },
   {
     id: "7",
@@ -49,6 +85,12 @@ export const allConstructions = [
     location: "Botucatu, SP",
     image: "spazio_verde",
     category: "Residencial",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "Spazio Verde",
+    conclusion_year: 2026,
+    area: "N/A",
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },
   {
     id: "8",
@@ -56,6 +98,12 @@ export const allConstructions = [
     location: "Botucatu, SP",
     image: "terras_altas",
     category: "Residencial",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "Terras Altas",
+    conclusion_year: 2026,
+    area: "N/A",
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },
   // INDUSTRIAIS
   {
@@ -64,6 +112,12 @@ export const allConstructions = [
     location: "Botucatu, SP",
     image: "caio_induscar",
     category: "Industrial",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "Caio Induscar",
+    conclusion_year: 2026,
+    area: "N/A",
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },
   {
     id: "10",
@@ -71,6 +125,12 @@ export const allConstructions = [
     location: "Botucatu, SP",
     image: "moura_leite",
     category: "Industrial",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "Moura Leite",
+    conclusion_year: 2026,
+    area: "N/A",
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },
   {
     id: "11",
@@ -78,6 +138,12 @@ export const allConstructions = [
     location: "Botucatu, SP",
     image: "vetroresina",
     category: "Industrial",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "Vetroresina",
+    conclusion_year: 2026,
+    area: "N/A",
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },
   // GOVERNAMENTAIS
   {
@@ -86,6 +152,12 @@ export const allConstructions = [
     location: "Botucatu, SP",
     image: "creche",
     category: "Governamental",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "Creche",
+    conclusion_year: 2026,
+    area: "N/A",
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },
   // MOMENTUM
   {
@@ -94,6 +166,12 @@ export const allConstructions = [
     location: "Botucatu, SP",
     image: "ninho_verde_ii__pardinho",
     category: "Momentum",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "Ninho Verde II - Pardinho",
+    conclusion_year: 2026,
+    area: "N/A",
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },
   {
     id: "14",
@@ -101,6 +179,12 @@ export const allConstructions = [
     location: "Botucatu, SP",
     image: "riviera_santa_cristina_i__arandu",
     category: "Momentum",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "Riviera Santa Cristina I - Arandu",
+    conclusion_year: 2026,
+    area: "N/A",
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },
   {
     id: "15",
@@ -108,6 +192,12 @@ export const allConstructions = [
     location: "Botucatu, SP",
     image: "riviera_santa_cristina_xiii__paranapanema",
     category: "Momentum",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "Riviera Santa Cristina XIII - Paranapanema",
+    conclusion_year: 2026,
+    area: "N/A",
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },
   {
     id: "16",
@@ -115,6 +205,12 @@ export const allConstructions = [
     location: "Botucatu, SP",
     image: "santa_barbara_resor_residence",
     category: "Momentum",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "Santa Bárbara Resort Residence",
+    conclusion_year: 2026,
+    area: "N/A",
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },
   // PROJETOS 3D
   {
@@ -123,5 +219,11 @@ export const allConstructions = [
     location: "Botucatu, SP",
     image: "projetos_3d",
     category: "Projetos 3D",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "Projetos 3D",
+    conclusion_year: 2026,
+    area: "N/A",
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },
 ];

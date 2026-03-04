@@ -1,7 +1,8 @@
-import { ChevronDown, X } from "lucide-react";
+import { X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { allConstructions } from "../../../config/portfolio";
+import CtaSection from "../../sections/home/CtaSection";
 
 // Função helper para shuffle determinístico baseado em seed (pura)
 function seededShuffle<T>(array: T[], seed: string): T[] {
@@ -35,7 +36,7 @@ interface PortfolioDetailProps {
   category: string;
   image: string;
   client?: string;
-  completionYear?: string;
+  completionYear?: number;
   area?: string;
   description?: string;
   challenges?: Array<{
@@ -55,26 +56,21 @@ export default function PortfolioDetail({
   category,
   image,
   client = "Confidencial",
-  completionYear = "2024",
+  completionYear = 2024,
   area = "N/A",
   description = "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-  challenges = [
-    {
-      title: "Fundações Especiais",
-      description:
-        "Implementação de soluções técnicas avançadas para garantir a estabilidade e durabilidade da estrutura.",
-    },
-    {
-      title: "Gestão de Prazos",
-      description:
-        "Coordenação eficiente de todas as etapas da obra, assegurando entregas dentro do cronograma estabelecido.",
-    },
-  ],
   services = ["Gerenciamento", "Projeto Estrutural", "Consultoria"],
   gallery = [],
 }: PortfolioDetailProps) {
   const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  // Placeholder image (simple gray SVG)
+  const placeholderImage =
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23e5e7eb' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='16' fill='%239ca3af'%3EImagem não disponível%3C/text%3E%3C/svg%3E";
+
+  // Formatar ano para string
+  const completionYearString = completionYear ? String(completionYear) : "2024";
 
   // Gerar um seed aleatório uma única vez ao montar o componente
   const [randomSeed] = useState(() => Math.random().toString(36));
@@ -127,6 +123,9 @@ export default function PortfolioDetail({
             sizes="100vw"
             alt={title}
             className="absolute inset-0 w-full h-full object-cover"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = placeholderImage;
+            }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
           <div className="relative p-8 z-10">
@@ -183,10 +182,7 @@ export default function PortfolioDetail({
               </div>
 
               {/* Gallery Section */}
-              <div className="mb-12">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  Galeria do Projeto
-                </h2>
+              <div className="mb-0">
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {imageGallery.slice(0, 6).map((img, idx) => (
                     <button
@@ -199,6 +195,9 @@ export default function PortfolioDetail({
                         alt={`Galeria ${idx + 1}`}
                         className="w-full h-full object-cover"
                         loading="lazy"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = placeholderImage;
+                        }}
                       />
                     </button>
                   ))}
@@ -206,30 +205,6 @@ export default function PortfolioDetail({
               </div>
 
               {/* Challenges Section */}
-              <div className="mb-12">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  Desafios e Soluções
-                </h2>
-                <div className="space-y-4">
-                  {challenges.map((challenge, idx) => (
-                    <details
-                      key={idx}
-                      className="group bg-white dark:bg-gray-800/50 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700"
-                    >
-                      <summary className="flex cursor-pointer items-center justify-between text-lg font-semibold text-gray-800 dark:text-gray-100">
-                        {challenge.title}
-                        <ChevronDown
-                          size={24}
-                          className="transition-transform duration-300 group-open:rotate-180"
-                        />
-                      </summary>
-                      <p className="mt-4 text-gray-600 dark:text-gray-300 leading-relaxed">
-                        {challenge.description}
-                      </p>
-                    </details>
-                  ))}
-                </div>
-              </div>
             </div>
 
             {/* Sidebar */}
@@ -260,7 +235,7 @@ export default function PortfolioDetail({
                       Conclusão:
                     </span>
                     <span className="text-gray-600 dark:text-gray-300 text-right">
-                      {completionYear}
+                      {completionYearString}
                     </span>
                   </li>
                   <li className="flex justify-between items-start gap-4">
@@ -296,7 +271,7 @@ export default function PortfolioDetail({
 
       {/* CTA Section */}
       <section className="w-full bg-gray-50 dark:bg-gray-900/50 py-16 mt-16">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 mb-0">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
               Conheça outros projetos
@@ -348,6 +323,9 @@ export default function PortfolioDetail({
                       src={`/static/images/porfolio/${projCategoryDir}/${project.image}/${project.image}-thumb.webp`}
                       alt={project.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = placeholderImage;
+                      }}
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
                       <span className="opacity-0 group-hover:opacity-100 text-white font-bold text-sm text-center px-2 transition-opacity duration-300">
@@ -392,10 +370,16 @@ export default function PortfolioDetail({
               alt={title}
               className="max-w-full max-h-[90vh] object-contain rounded-lg"
               onClick={(e) => e.stopPropagation()}
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = placeholderImage;
+              }}
             />
           </div>
         )}
       </section>
+      <div style={{ marginBottom: " -80px " }}>
+        <CtaSection />
+      </div>
     </main>
   );
 }

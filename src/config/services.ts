@@ -27,7 +27,7 @@ export const servicesPageData = {
         "Diário de Obra Digital",
       ],
       icon: HardHat,
-      image: "/placeholder-service-1.jpg",
+      image: "/static/images/services/gestao_de_obras.jpg",
       buttonText: "Saiba Mais",
     },
     {
@@ -45,7 +45,7 @@ export const servicesPageData = {
         "ART e Responsabilidade Técnica",
       ],
       icon: PencilRuler,
-      image: "/placeholder-service-2.jpg",
+      image: "/static/images/services/inspecao_e_laudos.jpg",
       buttonText: "Saiba Mais",
     },
     {
@@ -63,7 +63,7 @@ export const servicesPageData = {
         "Automação Predial",
       ],
       icon: HousePlus,
-      image: "/placeholder-service-3.jpg",
+      image: "/static/images/services/projetos_complementares.png",
       buttonText: "Saiba Mais",
     },
     {
@@ -80,7 +80,7 @@ export const servicesPageData = {
         "Regularização e Aprovação Legal",
       ],
       icon: DraftingCompass,
-      image: "/placeholder-service-4.jpg",
+      image: "/static/images/services/projeto_arquitetonico.jpg",
       buttonText: "Saiba Mais",
     },
     {
@@ -98,7 +98,7 @@ export const servicesPageData = {
         "Obtenção de AVCB / CLCB",
       ],
       icon: Flame,
-      image: "/placeholder-service-5.jpg",
+      image: "/static/images/services/combate_incendio.jpg",
       buttonText: "Saiba Mais",
     },
     {
@@ -116,7 +116,7 @@ export const servicesPageData = {
         "Acompanhamento Técnico",
       ],
       icon: Wrench,
-      image: "/placeholder-service-6.jpg",
+      image: "/static/images/services/manutencao_predial.png",
       buttonText: "Saiba Mais",
     },
   ],
