@@ -17,20 +17,31 @@ const categories = [
   "Projetos 3D",
 ];
 
+// Função para embaralhar array
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
 export default function PortfolioListSection() {
   const [selectedCategory, setSelectedCategory] = useState("Todos");
   const [currentPage, setCurrentPage] = useState(1);
+  const [shuffledConstructions] = useState(shuffleArray(allConstructions));
 
-  // Filtrar obras por categoria
+  // Filtrar obras por categoria (a partir das obras embaralhadas)
   const filteredConstructions = useMemo(() => {
     if (selectedCategory === "Todos") {
-      return allConstructions;
+      return shuffledConstructions;
     }
 
-    return allConstructions.filter(
+    return shuffledConstructions.filter(
       (construction) => construction.category === selectedCategory,
     );
-  }, [selectedCategory]);
+  }, [selectedCategory, shuffledConstructions]);
 
   // Calcular total de páginas
   const totalPages = Math.ceil(filteredConstructions.length / ITEMS_PER_PAGE);
@@ -97,12 +108,12 @@ export default function PortfolioListSection() {
             className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-8 mb-8"
           >
             {currentConstructions.map((project, idx) => (
-              <motion.div key={project.image + idx} variants={fadeUp}>
+              <motion.div key={project.directory + idx} variants={fadeUp}>
                 <PortfolioCard
                   id={project.id}
                   title={project.title}
                   location={project.location}
-                  image={project.image}
+                  directory={project.directory}
                   category={project.category || "Residencial"}
                 />
               </motion.div>

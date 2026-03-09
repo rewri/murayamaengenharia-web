@@ -23,11 +23,10 @@ export default function PortfolioDetailPage() {
       title={project.title}
       location={project.location}
       category={project.category}
-      image={project.image}
+      directory={project.directory}
       description={project.description}
       client={project.client}
       completionYear={project.conclusion_year}
-      area={project.area}
       services={project.services}
     />
   );

@@ -46,16 +46,16 @@ export default function PortfolioList() {
               !project ||
               !project.title ||
               !project.location ||
-              !project.image
+              !project.directory
             )
               return null;
             return (
-              <motion.div key={project.image + idx} variants={fadeUp}>
+              <motion.div key={project.directory + idx} variants={fadeUp}>
                 <PortfolioCard
                   id={project.id}
                   title={project.title}
                   location={project.location}
-                  image={project.image}
+                  directory={project.directory}
                   category={project.category || "Residencial"}
                 />
               </motion.div>

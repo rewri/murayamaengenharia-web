@@ -34,36 +34,32 @@ interface PortfolioDetailProps {
   title: string;
   location: string;
   category: string;
-  image: string;
+  directory: string;
   client?: string;
   completionYear?: number;
-  area?: string;
   description?: string;
   challenges?: Array<{
     title: string;
     description: string;
   }>;
   services?: string[];
-  gallery?: Array<{
-    thumb: string;
-    full: string;
-  }>;
 }
 
 export default function PortfolioDetail({
   title,
   location,
   category,
-  image,
+  directory,
   client = "Confidencial",
   completionYear = 2024,
-  area = "N/A",
   description = "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
   services = ["Gerenciamento", "Projeto Estrutural", "Consultoria"],
-  gallery = [],
 }: PortfolioDetailProps) {
   const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [loadedImageIndices, setLoadedImageIndices] = useState<Set<number>>(
+    new Set(),
+  );
 
   // Placeholder image (simple gray SVG)
   const placeholderImage =
@@ -75,38 +71,32 @@ export default function PortfolioDetail({
   // Gerar um seed aleatório uma única vez ao montar o componente
   const [randomSeed] = useState(() => Math.random().toString(36));
 
+  // Gerar galeria com até 50 imagens possíveis
+  const imageGallery = useMemo(() => {
+    return Array.from({ length: 50 }, (_, i) => {
+      const paddedIndex = String(i + 1).padStart(2, "0");
+      return {
+        thumb: `/static/images/porfolio/${directory}/thumb/${paddedIndex}-thumb.webp`,
+        full: `/static/images/porfolio/${directory}/lightbox/${paddedIndex}-lightbox.webp`,
+        index: i,
+      };
+    });
+  }, [directory]);
+
   // Gerar 4 projetos aleatórios excluindo o atual
   const relatedProjects = useMemo(() => {
     const filtered = allConstructions.filter(
       (proj) =>
-        proj && proj.image !== image && proj.category && proj.title && proj.id,
+        proj &&
+        proj.directory !== directory &&
+        proj.category &&
+        proj.title &&
+        proj.id,
     );
     // Usa o seed aleatório para gerar shuffle diferente a cada carregamento
-    const shuffled = seededShuffle(filtered, image + randomSeed);
+    const shuffled = seededShuffle(filtered, directory + randomSeed);
     return shuffled.slice(0, 4).filter(Boolean);
-  }, [image, randomSeed]);
-
-  // Map category names to directory names
-  const categoryMap: Record<string, string> = {
-    Comercial: "COMERCIAIS",
-    Residencial: "RESIDENCIAIS",
-    Industrial: "INDUSTRIAIS",
-    Governamental: "GOVERNAMENTAIS",
-    Momentum: "MOMENTUM",
-    "Projetos 3D": "PROJETOS_3D",
-  };
-
-  const categoryDir = categoryMap[category] || category.toUpperCase();
-
-  // Gerar galeria com padrão: basename-slideshow-{1-6}
-  const generateGallery = () => {
-    return Array.from({ length: 6 }, (_, i) => ({
-      thumb: `/static/images/porfolio/${categoryDir}/${image}/${image}-slideshow-${i + 1}-gallery-800.webp`,
-      full: `/static/images/porfolio/${categoryDir}/${image}/${image}-slideshow-${i + 1}-lightbox-1600.webp`,
-    }));
-  };
-
-  const imageGallery = gallery.length > 0 ? gallery : generateGallery();
+  }, [directory, randomSeed]);
 
   return (
     <main className="flex-grow w-full">
@@ -114,12 +104,7 @@ export default function PortfolioDetail({
       <div className="w-full mb-0">
         <div className="relative overflow-hidden min-h-[400px] flex flex-col justify-end">
           <img
-            src={`/static/images/porfolio/${categoryDir}/${image}/${image}-1600.webp`}
-            srcSet={`
-              /static/images/porfolio/${categoryDir}/${image}/${image}-800.webp 800w,
-              /static/images/porfolio/${categoryDir}/${image}/${image}-1200.webp 1200w,
-              /static/images/porfolio/${categoryDir}/${image}/${image}-1600.webp 1600w
-            `}
+            src={`/static/images/porfolio/${directory}/hero.webp`}
             sizes="100vw"
             alt={title}
             className="absolute inset-0 w-full h-full object-cover"
@@ -183,23 +168,45 @@ export default function PortfolioDetail({
 
               {/* Gallery Section */}
               <div className="mb-0">
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {imageGallery.slice(0, 6).map((img, idx) => (
-                    <button
-                      onClick={() => setSelectedImage(img.full)}
-                      key={idx}
-                      className="w-full aspect-[4/3] rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer overflow-hidden bg-gray-100 dark:bg-gray-800"
-                    >
-                      <img
-                        src={img.thumb}
-                        alt={`Galeria ${idx + 1}`}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = placeholderImage;
-                        }}
-                      />
-                    </button>
+                {loadedImageIndices.size > 0 ? (
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {imageGallery.map((img, idx) =>
+                      loadedImageIndices.has(img.index) ? (
+                        <button
+                          onClick={() => setSelectedImage(img.full)}
+                          key={img.index}
+                          className="w-full aspect-[4/3] rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer overflow-hidden bg-gray-100 dark:bg-gray-800"
+                        >
+                          <img
+                            src={img.thumb}
+                            alt={`Galeria ${idx + 1}`}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                          />
+                        </button>
+                      ) : null,
+                    )}
+                  </div>
+                ) : (
+                  <div className="text-center py-12 text-gray-400 dark:text-gray-500">
+                    Nenhuma imagem disponível.
+                  </div>
+                )}
+                {/* Hidden images for detection */}
+                <div style={{ display: "none" }}>
+                  {imageGallery.map((img) => (
+                    <img
+                      key={`detect-${img.index}`}
+                      src={img.thumb}
+                      alt="detect"
+                      onLoad={() => {
+                        setLoadedImageIndices((prev) => {
+                          const newSet = new Set(prev);
+                          newSet.add(img.index);
+                          return newSet;
+                        });
+                      }}
+                    />
                   ))}
                 </div>
               </div>
@@ -236,14 +243,6 @@ export default function PortfolioDetail({
                     </span>
                     <span className="text-gray-600 dark:text-gray-300 text-right">
                       {completionYearString}
-                    </span>
-                  </li>
-                  <li className="flex justify-between items-start gap-4">
-                    <span className="font-semibold text-gray-700 dark:text-gray-200 whitespace-nowrap">
-                      Área:
-                    </span>
-                    <span className="text-gray-600 dark:text-gray-300 text-right">
-                      {area}
                     </span>
                   </li>
                 </ul>
@@ -291,21 +290,10 @@ export default function PortfolioDetail({
                   !project.category ||
                   !project.title ||
                   !project.id ||
-                  !project.image
+                  !project.directory
                 ) {
                   return null;
                 }
-                const projectCategoryMap: Record<string, string> = {
-                  Comercial: "COMERCIAIS",
-                  Residencial: "RESIDENCIAIS",
-                  Industrial: "INDUSTRIAIS",
-                  Governamental: "GOVERNAMENTAIS",
-                  Momentum: "MOMENTUM",
-                  "Projetos 3D": "PROJETOS_3D",
-                };
-                const projCategoryDir =
-                  projectCategoryMap[project.category] ||
-                  project.category.toUpperCase();
                 const projSlug = project.title
                   .toLowerCase()
                   .normalize("NFD")
@@ -320,7 +308,7 @@ export default function PortfolioDetail({
                     className="relative group aspect-square rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-700 hover:shadow-lg transition-shadow duration-300"
                   >
                     <img
-                      src={`/static/images/porfolio/${projCategoryDir}/${project.image}/${project.image}-thumb.webp`}
+                      src={`/static/images/porfolio/${project.directory}/gallery.webp`}
                       alt={project.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       onError={(e) => {

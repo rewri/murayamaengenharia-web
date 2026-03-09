@@ -5,7 +5,7 @@ interface PortfolioCardProps {
   id: string;
   title: string;
   location: string;
-  image: string;
+  directory: string;
   category: string;
 }
 
@@ -13,7 +13,7 @@ export default function PortfolioCard({
   id,
   title,
   location,
-  image,
+  directory,
   category,
 }: PortfolioCardProps) {
   const navigate = useNavigate();
@@ -23,18 +23,6 @@ export default function PortfolioCard({
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/\s+/g, "-");
   const url = `/obras/${slug}-${id}`;
-
-  // Map category names to directory names
-  const categoryMap: Record<string, string> = {
-    Comercial: "COMERCIAIS",
-    Residencial: "RESIDENCIAIS",
-    Industrial: "INDUSTRIAIS",
-    Governamental: "GOVERNAMENTAIS",
-    Momentum: "MOMENTUM",
-    "Projetos 3D": "PROJETOS_3D",
-  };
-
-  const categoryDir = categoryMap[category] || category.toUpperCase();
   return (
     <div
       onClick={() => navigate(url)}
@@ -52,11 +40,11 @@ export default function PortfolioCard({
         </span>
         <picture className="w-full h-full block group-hover:scale-105 transition-transform duration-300">
           <source
-            srcSet={`/static/images/porfolio/${categoryDir}/${image}/${image}-thumb.webp`}
+            srcSet={`/static/images/porfolio/${directory}/gallery.webp`}
             type="image/webp"
           />
           <img
-            src={`/static/images/porfolio/${categoryDir}/${image}/${image}-thumb.webp`}
+            src={`/static/images/porfolio/${directory}/gallery.webp`}
             alt={title}
             loading="lazy"
             className="w-full h-full object-cover block"
