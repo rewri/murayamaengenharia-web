@@ -36,7 +36,7 @@ export default function AboutHeroSection() {
           <div
             className="absolute inset-0 bg-center bg-cover bg-no-repeat"
             style={{
-              backgroundImage: 'url("/static/images/about/empresa.png")',
+              backgroundImage: 'url("/static/images/about/murayama.webp")',
             }}
           ></div>
         </div>

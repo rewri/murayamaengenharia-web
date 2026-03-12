@@ -36,7 +36,55 @@ export const allConstructions = [
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },
+  {
+    id: "18",
+    title: "Associação Atlética Ferroviária",
+    location: "Botucatu, SP",
+    directory: "comerciais/aaf",
+    category: "Comercial",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "AAF",
+    conclusion_year: 2026,
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+  },
   // RESIDENCIAIS
+  {
+    id: "19",
+    title: "Zillo - Parque das Cascatas",
+    location: "Botucatu, SP",
+    directory: "residenciais/zillo_parque_das_cascatas",
+    category: "Residencial",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "Zillo",
+    conclusion_year: 2026,
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+  },
+  {
+    id: "21",
+    title: "Braga - Vale do Sol",
+    location: "Botucatu, SP",
+    directory: "residenciais/braga_vale_do_sol",
+    category: "Residencial",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "Braga",
+    conclusion_year: 2026,
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+  },
+  {
+    id: "20",
+    title: "Sacamone - Parque das Cascatas",
+    location: "Botucatu, SP",
+    directory: "residenciais/sacamone_parque_das_cascatas",
+    category: "Residencial",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "Sacamone",
+    conclusion_year: 2026,
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+  },
   {
     id: "4",
     title: "Diversos - Botucatu",
@@ -193,19 +241,6 @@ export const allConstructions = [
     description:
       "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
     client: "Santa Bárbara Resort Residence",
-    conclusion_year: 2026,
-    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
-  },
-  // PROJETOS 3D
-  {
-    id: "17",
-    title: "Projetos 3D",
-    location: "Botucatu, SP",
-    directory: "projetos_3d/projetos_3d",
-    category: "Projetos 3D",
-    description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-    client: "Projetos 3D",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },

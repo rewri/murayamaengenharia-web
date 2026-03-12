@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { fadeUp, stagger } from "../../../animations/motion";
 import { allConstructions } from "../../../config/portfolio";
 import PortfolioCard from "../../features/portfolio/PortfolioCard";
@@ -14,7 +15,6 @@ const categories = [
   "Industrial",
   "Governamental",
   "Momentum",
-  "Projetos 3D",
 ];
 
 // Função para embaralhar array
@@ -27,10 +27,35 @@ function shuffleArray<T>(array: T[]): T[] {
   return shuffled;
 }
 
-export default function PortfolioListSection() {
-  const [selectedCategory, setSelectedCategory] = useState("Todos");
+// Mapa de slug para categoria
+const categoryMap: Record<string, string> = {
+  comercial: "Comercial",
+  residencial: "Residencial",
+  industrial: "Industrial",
+  governamental: "Governamental",
+  momentum: "Momentum",
+};
+
+interface PortfolioListSectionProps {
+  initialCategory?: string;
+}
+
+export default function PortfolioListSection({
+  initialCategory,
+}: PortfolioListSectionProps) {
+  const navigate = useNavigate();
+  const mappedCategory = initialCategory
+    ? categoryMap[initialCategory] || "Todos"
+    : "Todos";
+  const selectedCategory = mappedCategory; // Derivar selectedCategory
   const [currentPage, setCurrentPage] = useState(1);
   const [shuffledConstructions] = useState(shuffleArray(allConstructions));
+
+  // Resetar página quando a categoria da URL mudar
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setCurrentPage(1);
+  }, [initialCategory]);
 
   // Filtrar obras por categoria (a partir das obras embaralhadas)
   const filteredConstructions = useMemo(() => {
@@ -53,10 +78,19 @@ export default function PortfolioListSection() {
     return filteredConstructions.slice(startIndex, endIndex);
   }, [filteredConstructions, currentPage]);
 
-  // Resetar para página 1 quando trocar de categoria
+  // Resetar para página 1 quando trocar de categoria e navegar para URL
   const handleCategoryChange = (category: string) => {
-    setSelectedCategory(category);
-    setCurrentPage(1);
+    // Navegar para nova URL (o useEffect vai resetar a página)
+    if (category === "Todos") {
+      navigate("/obras");
+    } else {
+      const slug = category
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/\s+/g, "-");
+      navigate(`/obras/${slug}`);
+    }
   };
 
   const handlePreviousPage = () => {

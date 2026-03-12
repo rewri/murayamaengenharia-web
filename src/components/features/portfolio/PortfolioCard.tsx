@@ -22,7 +22,12 @@ export default function PortfolioCard({
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/\s+/g, "-");
-  const url = `/obras/${slug}-${id}`;
+  const categorySlug = category
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-");
+  const url = `/obras/${categorySlug}/${slug}-${id}`;
   return (
     <div
       onClick={() => navigate(url)}

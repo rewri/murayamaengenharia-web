@@ -1,4 +1,4 @@
-import { X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { allConstructions } from "../../../config/portfolio";
@@ -34,6 +34,7 @@ interface PortfolioDetailProps {
   title: string;
   location: string;
   category: string;
+  categorySlug?: string;
   directory: string;
   client?: string;
   completionYear?: number;
@@ -49,6 +50,7 @@ export default function PortfolioDetail({
   title,
   location,
   category,
+  categorySlug,
   directory,
   client = "Confidencial",
   completionYear = 2024,
@@ -56,7 +58,9 @@ export default function PortfolioDetail({
   services = ["Gerenciamento", "Projeto Estrutural", "Consultoria"],
 }: PortfolioDetailProps) {
   const navigate = useNavigate();
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
+    null,
+  );
   const [loadedImageIndices, setLoadedImageIndices] = useState<Set<number>>(
     new Set(),
   );
@@ -82,6 +86,38 @@ export default function PortfolioDetail({
       };
     });
   }, [directory]);
+
+  const handleNextImage = () => {
+    const validImages = imageGallery.filter((img) =>
+      loadedImageIndices.has(img.index),
+    );
+    if (selectedImageIndex !== null && validImages.length > 0) {
+      const currentIdx = validImages.findIndex(
+        (img) => img.index === selectedImageIndex,
+      );
+      const nextIdx = (currentIdx + 1) % validImages.length;
+      setSelectedImageIndex(validImages[nextIdx].index);
+    }
+  };
+
+  const handlePrevImage = () => {
+    const validImages = imageGallery.filter((img) =>
+      loadedImageIndices.has(img.index),
+    );
+    if (selectedImageIndex !== null && validImages.length > 0) {
+      const currentIdx = validImages.findIndex(
+        (img) => img.index === selectedImageIndex,
+      );
+      const prevIdx =
+        (currentIdx - 1 + validImages.length) % validImages.length;
+      setSelectedImageIndex(validImages[prevIdx].index);
+    }
+  };
+
+  const currentImage =
+    selectedImageIndex !== null
+      ? imageGallery.find((img) => img.index === selectedImageIndex)
+      : null;
 
   // Gerar 4 projetos aleatórios excluindo o atual
   const relatedProjects = useMemo(() => {
@@ -144,6 +180,19 @@ export default function PortfolioDetail({
             >
               Obras
             </button>
+            {categorySlug && (
+              <>
+                <span className="text-gray-400 dark:text-gray-500 text-sm font-medium">
+                  /
+                </span>
+                <button
+                  onClick={() => navigate(`/obras/${categorySlug}`)}
+                  className="text-gray-500 dark:text-gray-400 text-sm font-medium hover:text-primary dark:hover:text-primary transition-colors capitalize"
+                >
+                  {category}
+                </button>
+              </>
+            )}
             <span className="text-gray-400 dark:text-gray-500 text-sm font-medium">
               /
             </span>
@@ -173,7 +222,7 @@ export default function PortfolioDetail({
                     {imageGallery.map((img, idx) =>
                       loadedImageIndices.has(img.index) ? (
                         <button
-                          onClick={() => setSelectedImage(img.full)}
+                          onClick={() => setSelectedImageIndex(img.index)}
                           key={img.index}
                           className="w-full aspect-[4/3] rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer overflow-hidden bg-gray-100 dark:bg-gray-800"
                         >
@@ -299,7 +348,12 @@ export default function PortfolioDetail({
                   .normalize("NFD")
                   .replace(/[\u0300-\u036f]/g, "")
                   .replace(/\s+/g, "-");
-                const projUrl = `/obras/${projSlug}-${project.id}`;
+                const projCategorySlug = project.category
+                  .toLowerCase()
+                  .normalize("NFD")
+                  .replace(/[\u0300-\u036f]/g, "")
+                  .replace(/\s+/g, "-");
+                const projUrl = `/obras/${projCategorySlug}/${projSlug}-${project.id}`;
 
                 return (
                   <button
@@ -341,20 +395,34 @@ export default function PortfolioDetail({
         </div>
 
         {/* Lightbox Modal */}
-        {selectedImage && (
+        {selectedImageIndex !== null && currentImage && (
           <div
             className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4"
-            onClick={() => setSelectedImage(null)}
+            onClick={() => setSelectedImageIndex(null)}
           >
             <button
-              onClick={() => setSelectedImage(null)}
+              onClick={() => setSelectedImageIndex(null)}
               className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
               aria-label="Fechar"
             >
               <X size={32} />
             </button>
+
+            {/* Previous Button */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handlePrevImage();
+              }}
+              className="absolute left-4 text-white hover:text-gray-300 transition-colors z-10"
+              aria-label="Imagem anterior"
+            >
+              <ChevronLeft size={40} />
+            </button>
+
+            {/* Image */}
             <img
-              src={selectedImage}
+              src={currentImage.full}
               alt={title}
               className="max-w-full max-h-[90vh] object-contain rounded-lg"
               onClick={(e) => e.stopPropagation()}
@@ -362,6 +430,23 @@ export default function PortfolioDetail({
                 (e.target as HTMLImageElement).src = placeholderImage;
               }}
             />
+
+            {/* Next Button */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleNextImage();
+              }}
+              className="absolute right-4 text-white hover:text-gray-300 transition-colors z-10"
+              aria-label="Próxima imagem"
+            >
+              <ChevronRight size={40} />
+            </button>
+
+            {/* Image Counter */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-sm font-medium bg-black/40 px-4 py-2 rounded-lg">
+              {currentImage.index + 1} / {loadedImageIndices.size}
+            </div>
           </div>
         )}
       </section>

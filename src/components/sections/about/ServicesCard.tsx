@@ -23,7 +23,7 @@ export default function ServicesCard({ section }: ServicesCardProps) {
       variants={fadeUp}
       className="w-full bg-white dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700"
     >
-      <div className="container mx-auto pl-8">
+      <div className="container mx-auto px-8">
         <div className="py-6 md:py-8">
           <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-start">
             {/* Image */}

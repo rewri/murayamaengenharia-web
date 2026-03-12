@@ -26,7 +26,7 @@ export default function TestimonialsCard({
           />
         ))}
       </div>
-      <blockquote className="text-base text-neutral-dark leading-relaxed font-body">
+      <blockquote className="text-base text-neutral-dark leading-relaxed font-body text-left">
         "{testimonial.testimonial}"
       </blockquote>
       <div className="flex items-center gap-4 mt-auto">

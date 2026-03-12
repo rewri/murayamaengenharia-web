@@ -2,8 +2,17 @@ import { Navigate, useParams } from "react-router-dom";
 import PortfolioDetail from "../../components/features/portfolio/PortfolioDetail";
 import { allConstructions } from "../../config/portfolio";
 
+// Mapa de slug para categoria (inverso do mapa em PortfolioListSection)
+const categorySlugMap: Record<string, string> = {
+  comercial: "Comercial",
+  residencial: "Residencial",
+  industrial: "Industrial",
+  governamental: "Governamental",
+  momentum: "Momentum",
+};
+
 export default function PortfolioDetailPage() {
-  const { slug } = useParams<{ slug: string }>();
+  const { category, slug } = useParams<{ category: string; slug: string }>();
 
   // Extrair o ID do slug (formato: titulo-da-obra-123)
   const id = slug?.split("-").pop();
@@ -13,8 +22,9 @@ export default function PortfolioDetailPage() {
     (construction) => construction.id === id,
   );
 
-  // Se não encontrar o projeto, redirecionar para a página de obras
-  if (!project) {
+  // Validar se categoria da URL corresponde com categoria do projeto
+  const categoryName = category ? categorySlugMap[category] || "" : "";
+  if (!project || !categoryName || project.category !== categoryName) {
     return <Navigate to="/obras" replace />;
   }
 
@@ -23,6 +33,7 @@ export default function PortfolioDetailPage() {
       title={project.title}
       location={project.location}
       category={project.category}
+      categorySlug={category}
       directory={project.directory}
       description={project.description}
       client={project.client}

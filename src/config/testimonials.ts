@@ -25,13 +25,13 @@ export const testimonials: Testimonial[] = [
       "Só temos a agradecer pela equipe maravilhosa que esteve sempre presente desde o projeto, compras, financeiro, acompanhamento da obra, etc, além do design de interiores na escolha do acabamento. Estamos muito felizes com a escolha da Murayama.",
   },
   {
-    author: "Gustavo - Art Glass Vidraçaria",
+    author: "Jacques Oliveira Ferreira ",
     testimonial:
-      "Sou parceiro da Murayama e pelo que acompanho nas diversas obras que fiz em conjunto, só tenho que elogiar a qualidade, desde o projeto até a entrega. Equipe fantástica que realiza o sonho de muitas pessoas. Parabéns pelo excelente trabalho!",
+      "Há pouco mais de 5 anos, escolhemos a Construtora Murayama para nos ajudar a realizar um sonho: construção da nossa casa! Tudo correu impecavelmente. Nenhuma dor de cabeça, nenhum contratempo, tudo que nos prometeram, cumpriram, inclusive quanto ao prazo de conclusão da obra. Agora, passados 5 anos que recebemos a casa, chegou o momento de repintá-la. A escolha não poderia ser diferente: Murayama! Esperamos uma janela na agenda concorrida deles e novamente fizemos a escolha certa: tudo correu como previsto e nossa expectativa até superada! Não há respingos de tintas no chão, nos vidros, tudo muito bem protegido. Paredes tratadas, tintas aplicadas, enfim, serviços de primeira, como era de se esperar de uma empresa do nível da Murayama. Ao @thiagomurayama , nosso muito obrigado por tudo! Sim, continuamos recomendando a Murayama!!! Nesta, confiamos!!!",
   },
   {
-    author: "Equipe Douglas Calhas",
+    author: "Alaerte Vidali",
     testimonial:
-      "Atendimento top, com qualidade e responsabilidade fazendo por merecer todo o mérito que a marca Murayama Engenharia com muita competência conquistou. Parabéns a toda equipe pelo profissionalismo!",
+      "Me sinto privilegiado e agradecido por ter sido apresentado à Murayama e assim ter tido uma experiência feliz com minha primeira construção, especialmente quando vemos tantos casos tristes de famílias perdendo suas economias com empreiteiros desonestos. Além de excelência no serviço, a Murayama tem uma equipe agradável para relacionar-se. Tanto eu quanto minha esposa gostamos e recomendamos. Agora é só continuar o ótimo trabalho, parabéns e agradecido.",
   },
 ];

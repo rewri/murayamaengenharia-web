@@ -1,13 +1,10 @@
 import { Check } from "lucide-react";
-import type { ReactElement } from "react";
-import { cloneElement } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 interface ServiceCardProps {
   index: number;
   title: string;
   description: string;
-  icon: ReactElement;
   highlights: string[];
 }
 
@@ -15,16 +12,11 @@ export default function ServiceCard({
   index,
   title,
   description,
-  icon,
   highlights,
 }: ServiceCardProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const isAboutPage = location.pathname === "/sobre";
-  const styledIcon = cloneElement(icon, {
-    className: "text-primary",
-    size: 24,
-  } as never);
 
   return (
     <div
@@ -34,38 +26,42 @@ export default function ServiceCard({
     >
       <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(to_right,currentColor_1px,transparent_1px),linear-gradient(to_bottom,currentColor_1px,transparent_1px)] bg-[size:20px_20px]" />
       <div
-        className="relative p-5 flex flex-col flex-1 justify-center"
+        className="relative p-5 flex flex-col flex-1"
         style={{ borderTop: "3px solid #a5a5a5" }}
       >
-        <div className="flex justify-center mb-4">
-          <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg">
-            {styledIcon}
-          </div>
+        {/* Bloco do título */}
+        <div className="min-h-16 flex items-start">
+          <h3 className="font-bold text-2xl text-secondary text-left">
+            {title}
+          </h3>
         </div>
-        <h3 className="font-bold text-xl text-secondary mb-3 text-center">
-          {title}
-        </h3>
-        <p className="text-sm text-muted-foreground leading-relaxed text-left mb-4">
-          {description}
-        </p>
-        <ul className="list-none p-0 m-0 space-y-2 mb-4">
-          {highlights.map((highlight) => (
-            <li
-              key={highlight}
-              className="flex items-center text-sm text-secondary"
-            >
-              <span className="text-accent font-bold mr-1">
-                <Check size={22} />
-              </span>
-              {highlight}
-            </li>
-          ))}
-        </ul>
-        <div className="mt-4 text-center">
+
+        {/* Bloco de conteúdo de texto e highlights */}
+        <div className="flex-1 flex flex-col pt-2">
+          <p className="text-sm text-muted-foreground leading-relaxed text-left mb-4">
+            {description}
+          </p>
+          <ul className="list-none p-0 m-0 space-y-2">
+            {highlights.map((highlight) => (
+              <li
+                key={highlight}
+                className="flex items-start gap-2 text-sm text-secondary"
+              >
+                <span className="text-accent font-bold flex-shrink-0 flex items-center justify-center">
+                  <Check size={22} />
+                </span>
+                <span className="text-left font-semibold">{highlight}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Bloco "Saiba mais" */}
+        <div className="mt-auto min-h-12 flex items-center justify-start pt-8">
           {!isAboutPage && (
             <a
               onClick={() => navigate("/sobre")}
-              className="inline-block text-sm font-medium text-primary cursor-pointer transition-all duration-200 hover:underline hover:text-primary/80 active:scale-95 py-2 px-3 pb-0 rounded touch-target"
+              className="inline-block text-sm font-medium text-primary cursor-pointer transition-all duration-200 hover:underline hover:text-primary/80 active:scale-95 py-2 px-3 pb-0 rounded touch-target underline"
             >
               SAIBA MAIS →
             </a>

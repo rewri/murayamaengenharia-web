@@ -19,8 +19,11 @@ function AppContent() {
         <Route path="/" element={<Main />}>
           <Route index element={<HomePage />} />
           <Route path="sobre" element={<AboutPage />} />
-          <Route path="obras" element={<PortfolioPage />} />
-          <Route path="obras/:slug" element={<PortfolioDetailPage />} />
+          <Route path="obras/:category?" element={<PortfolioPage />} />
+          <Route
+            path="obras/:category/:slug"
+            element={<PortfolioDetailPage />}
+          />
           <Route path="contato" element={<ContactPage />} />
         </Route>
       </Routes>

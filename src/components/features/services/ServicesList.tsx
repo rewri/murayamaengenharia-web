@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import React from "react";
 import { fadeUp, stagger } from "../../../animations/motion";
 import { servicesList } from "../../../config/services";
 import ServiceCard from "./ServicesCard";
@@ -20,7 +19,6 @@ export default function ServicesList() {
               index={index}
               title={service.title}
               description={service.description}
-              icon={React.createElement(service.icon)}
               highlights={service.highlights}
             />
           </motion.div>
