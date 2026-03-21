@@ -13,7 +13,9 @@ export default function PortfolioPage() {
         <div className="max-w-7xl mx-auto px-4 pb-16">
           <HeroSection />
           <PortfolioListSection initialCategory={category} />
-          <ProjectsArchitectureSection />
+          <div id="projects-architecture-section">
+            <ProjectsArchitectureSection />
+          </div>
         </div>
       </section>
       <div style={{ marginBottom: " -80px " }}>

@@ -1,247 +1,74 @@
+// Portfolio Configuration Index
+// Importa todas as categorias e as combina em uma única lista
+
+import { comercial } from "./portfolio/comercial/config";
+import { governamental } from "./portfolio/governamental/config";
+import { industrial } from "./portfolio/industrial/config";
+import { momentum } from "./portfolio/momentum/config";
+import { parqueDasCascatas } from "./portfolio/parque_das_cascatas/config";
+import { reserva } from "./portfolio/reserva/config";
+import { spazioVerde } from "./portfolio/spazio_verde/config";
+import { terrasAltas } from "./portfolio/terras_altas/config";
+import { valeDolSol } from "./portfolio/vale_do_sol/config";
+
+// Combinando todas as categorias
 export const allConstructions = [
-  // COMERCIAIS
-  {
-    id: "1",
-    title: "Instituto Rodrigo Marques",
-    location: "Botucatu, SP",
-    directory: "comerciais/instituto_rodrigo_marques",
-    category: "Comercial",
-    description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-    client: "Instituto Rodrigo Marques",
-    conclusion_year: 2026,
-    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
-  },
-  {
-    id: "2",
-    title: "Clínica Odontológica",
-    location: "Botucatu, SP",
-    directory: "comerciais/clinica_odontologica",
-    category: "Comercial",
-    description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-    client: "Clínica Odontológica",
-    conclusion_year: 2026,
-    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
-  },
-  {
-    id: "3",
-    title: "Salas Comerciais",
-    location: "Botucatu, SP",
-    directory: "comerciais/salas_comerciais",
-    category: "Comercial",
-    description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-    client: "Salas Comerciais",
-    conclusion_year: 2026,
-    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
-  },
-  {
-    id: "18",
-    title: "Associação Atlética Ferroviária",
-    location: "Botucatu, SP",
-    directory: "comerciais/aaf",
-    category: "Comercial",
-    description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-    client: "AAF",
-    conclusion_year: 2026,
-    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
-  },
-  // RESIDENCIAIS
-  {
-    id: "19",
-    title: "Zillo - Parque das Cascatas",
-    location: "Botucatu, SP",
-    directory: "residenciais/zillo_parque_das_cascatas",
-    category: "Residencial",
-    description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-    client: "Zillo",
-    conclusion_year: 2026,
-    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
-  },
-  {
-    id: "21",
-    title: "Braga - Vale do Sol",
-    location: "Botucatu, SP",
-    directory: "residenciais/braga_vale_do_sol",
-    category: "Residencial",
-    description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-    client: "Braga",
-    conclusion_year: 2026,
-    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
-  },
-  {
-    id: "20",
-    title: "Sacamone - Parque das Cascatas",
-    location: "Botucatu, SP",
-    directory: "residenciais/sacamone_parque_das_cascatas",
-    category: "Residencial",
-    description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-    client: "Sacamone",
-    conclusion_year: 2026,
-    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
-  },
-  {
-    id: "4",
-    title: "Diversos - Botucatu",
-    location: "Botucatu, SP",
-    directory: "residenciais/diversos",
-    category: "Residencial",
-    description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-    client: "Diversos",
-    conclusion_year: 2026,
-    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
-  },
-  {
-    id: "5",
-    title: "Parque das Cascatas",
-    location: "Botucatu, SP",
-    directory: "residenciais/parque_das_cascatas",
-    category: "Residencial",
-    description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-    client: "Parque das Cascatas",
-    conclusion_year: 2026,
-    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
-  },
-  {
-    id: "6",
-    title: "Parque Laguna",
-    location: "Botucatu, SP",
-    directory: "residenciais/parque_laguna",
-    category: "Residencial",
-    description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-    client: "Parque Laguna",
-    conclusion_year: 2026,
-    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
-  },
-  {
-    id: "7",
-    title: "Spazio Verde",
-    location: "Botucatu, SP",
-    directory: "residenciais/spazio_verde",
-    category: "Residencial",
-    description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-    client: "Spazio Verde",
-    conclusion_year: 2026,
-    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
-  },
-  {
-    id: "8",
-    title: "Terras Altas",
-    location: "Botucatu, SP",
-    directory: "residenciais/terras_altas",
-    category: "Residencial",
-    description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-    client: "Terras Altas",
-    conclusion_year: 2026,
-    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
-  },
-  // INDUSTRIAIS
-  {
-    id: "9",
-    title: "Caio Induscar",
-    location: "Botucatu, SP",
-    directory: "industriais/caio_induscar",
-    category: "Industrial",
-    description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-    client: "Caio Induscar",
-    conclusion_year: 2026,
-    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
-  },
-  {
-    id: "10",
-    title: "Moura Leite",
-    location: "Botucatu, SP",
-    directory: "industriais/moura_leite",
-    category: "Industrial",
-    description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-    client: "Moura Leite",
-    conclusion_year: 2026,
-    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
-  },
-  {
-    id: "11",
-    title: "Vetroresina",
-    location: "Botucatu, SP",
-    directory: "industriais/vetroresina",
-    category: "Industrial",
-    description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-    client: "Vetroresina",
-    conclusion_year: 2026,
-    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
-  },
-  // GOVERNAMENTAIS
-  {
-    id: "12",
-    title: "Creche",
-    location: "Botucatu, SP",
-    directory: "governamentais/creche",
-    category: "Governamental",
-    description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-    client: "Creche",
-    conclusion_year: 2026,
-    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
-  },
-  // MOMENTUM
-  {
-    id: "13",
-    title: "Ninho Verde II",
-    location: "Pardinho, SP",
-    directory: "momentum/ninho_verde_II",
-    category: "Momentum",
-    description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-    client: "Ninho Verde II",
-    conclusion_year: 2026,
-    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
-  },
-  {
-    id: "14",
-    title: "Riviera Santa Cristina I",
-    location: "Arandu, SP",
-    directory: "momentum/riviera_santa_cristina_I",
-    category: "Momentum",
-    description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-    client: "Riviera Santa Cristina I",
-    conclusion_year: 2026,
-    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
-  },
-  {
-    id: "15",
-    title: "Riviera Santa Cristina XIII",
-    location: "Paranapanema, SP",
-    directory: "momentum/riviera_santa_cristina_XIII",
-    category: "Momentum",
-    description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-    client: "Riviera Santa Cristina XIII",
-    conclusion_year: 2026,
-    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
-  },
-  {
-    id: "16",
-    title: "Santa Bárbara Resort Residence",
-    location: "Botucatu, SP",
-    directory: "momentum/santa_barbara_resort_residence",
-    category: "Momentum",
-    description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
-    client: "Santa Bárbara Resort Residence",
-    conclusion_year: 2026,
-    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
-  },
+  ...comercial,
+  ...industrial,
+  ...governamental,
+  ...momentum,
+  ...parqueDasCascatas,
+  ...spazioVerde,
+  ...terrasAltas,
+  ...valeDolSol,
+  ...reserva,
 ];
+
+// Exportando as categorias individuais para uso específico
+export type ConstructionItem = (typeof allConstructions)[0];
+
+export const portfolioCategories = [
+  { id: "comercial", label: "Comercial", items: comercial },
+  { id: "industrial", label: "Industrial", items: industrial },
+  { id: "governamental", label: "Governamental", items: governamental },
+  { id: "momentum", label: "Momentum", items: momentum },
+  {
+    id: "parque-das-cascatas",
+    label: "Parque das Cascatas",
+    items: parqueDasCascatas,
+  },
+  { id: "spazio-verde", label: "Spazio Verde", items: spazioVerde },
+  { id: "terras-altas", label: "Terras Altas", items: terrasAltas },
+  { id: "vale-do-sol", label: "Vale do Sol", items: valeDolSol },
+  { id: "reserva", label: "Reserva", items: reserva },
+];
+
+// Função auxiliar para obter uma categoria específica
+export function getPortfolioCategory(categoryId: string) {
+  return portfolioCategories.find((cat) => cat.id === categoryId);
+}
+
+// Função auxiliar para obter um projeto por ID
+export function getConstructionById(id: string) {
+  return allConstructions.find((construction) => construction.id === id);
+}
+
+// Função auxiliar para gerar slug (apenas a partir do title)
+export function generateConstructionSlug(title: string) {
+  const normalizedTitle = title
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+  return normalizedTitle;
+}
+
+// Função auxiliar para encontrar por slug
+export function getConstructionBySlug(slug: string) {
+  return allConstructions.find((construction) => {
+    const constructionSlug = generateConstructionSlug(construction.title);
+    return constructionSlug === slug;
+  });
+}

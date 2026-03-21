@@ -1,5 +1,4 @@
 import AboutHeroSection from "../../components/sections/about/AboutHeroSection";
-import GallerySection from "../../components/sections/about/GallerySection";
 import MissionSection from "../../components/sections/about/MissionSection";
 import ServicesSection from "../../components/sections/about/ServicesSection";
 import TestimonialsSection from "../../components/sections/about/TestimonialsSection";
@@ -12,7 +11,6 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 pb-16">
           <AboutHeroSection />
           <MissionSection />
-          <GallerySection />
           <ServicesSection />
           <TestimonialsSection />
         </div>

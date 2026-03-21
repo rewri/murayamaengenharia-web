@@ -45,6 +45,21 @@ export const servicesPageData = {
       buttonText: "Saiba Mais",
     },
     {
+      key: "complementares",
+      category: "Infraestrutura",
+      title: "Projetos Complementares Integrados",
+      description:
+        "Desenvolvemos os projetos essenciais que dão vida e funcionalidade à sua edificação. Nossas soluções de engenharia (estrutural, hidrossanitária e elétrica) são totalmente integradas, garantindo segurança, eficiência e conformidade com as normas técnicas.",
+      items: [
+        "Projeto Estrutural",
+        "Projeto Hidrossanitário",
+        "Projeto Elétrico",
+      ],
+      icon: HousePlus,
+      image: "/static/images/services/projetos_complementares.png",
+      buttonText: "Saiba Mais",
+    },
+    {
       key: "laudos",
       category: "Diagnóstico Técnico",
       title: "Perícias e Laudos Técnicos de Engenharia",
@@ -60,22 +75,6 @@ export const servicesPageData = {
       image: "/static/images/services/inspecao_e_laudos.jpg",
       buttonText: "Saiba Mais",
     },
-    {
-      key: "complementares",
-      category: "Infraestrutura",
-      title: "Projetos Complementares Integrados",
-      description:
-        "Desenvolvemos os projetos essenciais que dão vida e funcionalidade à sua edificação. Nossas soluções de engenharia (estrutural, hidrossanitária e elétrica) são totalmente integradas, garantindo segurança, eficiência e conformidade com as normas técnicas.",
-      items: [
-        "Projeto Estrutural",
-        "Projeto Hidrossanitário",
-        "Projeto Elétrico",
-      ],
-      icon: HousePlus,
-      image: "/static/images/services/projetos_complementares.png",
-      buttonText: "Saiba Mais",
-    },
-
     {
       key: "incendio",
       category: "Segurança e Normas",

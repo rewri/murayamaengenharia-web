@@ -1,23 +1,17 @@
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Home } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fadeUp, stagger } from "../../../animations/motion";
-import { allConstructions } from "../../../config/portfolio";
+import {
+  allConstructions,
+  portfolioCategories,
+} from "../../../config/portfolio";
 import PortfolioCard from "../../features/portfolio/PortfolioCard";
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 10;
 
-const categories = [
-  "Todos",
-  "Comercial",
-  "Residencial",
-  "Industrial",
-  "Governamental",
-  "Momentum",
-];
-
-// Função para embaralhar array
+// Função para embaralhar array (Fisher-Yates shuffle)
 function shuffleArray<T>(array: T[]): T[] {
   const shuffled = [...array];
   for (let i = shuffled.length - 1; i > 0; i--) {
@@ -27,14 +21,30 @@ function shuffleArray<T>(array: T[]): T[] {
   return shuffled;
 }
 
-// Mapa de slug para categoria
-const categoryMap: Record<string, string> = {
-  comercial: "Comercial",
-  residencial: "Residencial",
-  industrial: "Industrial",
-  governamental: "Governamental",
-  momentum: "Momentum",
-};
+// Gerar lista dinâmica de categorias a partir da configuração
+function getCategories(): string[] {
+  return [
+    "Todos",
+    ...portfolioCategories
+      .filter((cat) => cat.items.length > 0) // Apenas categorias com projetos
+      .map((cat) => cat.label),
+    "Projetos 3D",
+  ];
+}
+
+// Mapear slug para categoria (gerado dinamicamente)
+function getCategoryMap(): Record<string, string> {
+  const map: Record<string, string> = {};
+  portfolioCategories.forEach((cat) => {
+    const slug = cat.label
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/\s+/g, "-");
+    map[slug] = cat.label;
+  });
+  return map;
+}
 
 interface PortfolioListSectionProps {
   initialCategory?: string;
@@ -44,12 +54,16 @@ export default function PortfolioListSection({
   initialCategory,
 }: PortfolioListSectionProps) {
   const navigate = useNavigate();
+  const categories = getCategories();
+  const categoryMap = getCategoryMap();
+
   const mappedCategory = initialCategory
     ? categoryMap[initialCategory] || "Todos"
     : "Todos";
-  const selectedCategory = mappedCategory; // Derivar selectedCategory
+  const selectedCategory = mappedCategory;
   const [currentPage, setCurrentPage] = useState(1);
-  const [shuffledConstructions] = useState(shuffleArray(allConstructions));
+  // Reverter a ordem para mostrar as mais recentes (últimas inseridas) primeiro
+  const [orderedConstructions] = useState([...allConstructions].reverse());
 
   // Resetar página quando a categoria da URL mudar
   useEffect(() => {
@@ -57,16 +71,17 @@ export default function PortfolioListSection({
     setCurrentPage(1);
   }, [initialCategory]);
 
-  // Filtrar obras por categoria (a partir das obras embaralhadas)
+  // Filtrar obras por categoria (na ordem de inserção, mais recentes primeiro)
+  // Para "Todos", embaralhar aleatoriamente
   const filteredConstructions = useMemo(() => {
     if (selectedCategory === "Todos") {
-      return shuffledConstructions;
+      return shuffleArray(orderedConstructions);
     }
 
-    return shuffledConstructions.filter(
+    return orderedConstructions.filter(
       (construction) => construction.category === selectedCategory,
     );
-  }, [selectedCategory, shuffledConstructions]);
+  }, [selectedCategory, orderedConstructions]);
 
   // Calcular total de páginas
   const totalPages = Math.ceil(filteredConstructions.length / ITEMS_PER_PAGE);
@@ -80,6 +95,20 @@ export default function PortfolioListSection({
 
   // Resetar para página 1 quando trocar de categoria e navegar para URL
   const handleCategoryChange = (category: string) => {
+    // Se for Projetos 3D, navegar para /obras e depois fazer scroll
+    if (category === "Projetos 3D") {
+      navigate("/obras");
+      setTimeout(() => {
+        const element = document.getElementById(
+          "projects-architecture-section",
+        );
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+      return;
+    }
+
     // Navegar para nova URL (o useEffect vai resetar a página)
     if (category === "Todos") {
       navigate("/obras");
@@ -119,13 +148,17 @@ export default function PortfolioListSection({
                   : "bg-white dark:bg-surface-dark border border-[#e5e7eb] dark:border-gray-700 text-[#111418] dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
               }`}
             >
-              <span
-                className={`text-sm leading-normal ${
-                  isActive ? "font-bold" : "font-medium"
-                }`}
-              >
-                {category}
-              </span>
+              {category === "Todos" ? (
+                <Home size={16} />
+              ) : (
+                <span
+                  className={`text-sm leading-normal ${
+                    isActive ? "font-bold" : "font-medium"
+                  }`}
+                >
+                  {category}
+                </span>
+              )}
             </button>
           );
         })}

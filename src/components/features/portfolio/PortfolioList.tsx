@@ -9,13 +9,10 @@ export default function PortfolioList() {
   const [projectsMock, setProjectsMock] = useState<typeof allConstructions>([]);
 
   useEffect(() => {
-    const arr = [...allConstructions];
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
+    // Mostrar os 6 primeiros projetos em ordem de inserção (mais recentes primeiro)
+    const orderedProjects = [...allConstructions].reverse();
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setProjectsMock(arr.slice(0, 6));
+    setProjectsMock(orderedProjects.slice(0, 6));
   }, []);
 
   const navigate = useNavigate();
