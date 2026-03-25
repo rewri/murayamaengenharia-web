@@ -17,6 +17,7 @@ export default function ServicesList() {
           <motion.div key={service.title} variants={fadeUp}>
             <ServiceCard
               index={index}
+              serviceKey={service.key}
               title={service.title}
               description={service.description}
               highlights={service.highlights}

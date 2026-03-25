@@ -13,6 +13,14 @@ export function Header() {
     if (href === "/") {
       return location.pathname === "/";
     }
+
+    if (href === "/obras") {
+      return (
+        location.pathname === "/obras" ||
+        location.pathname.startsWith("/obras/")
+      );
+    }
+
     return location.pathname === href;
   };
 
@@ -41,10 +49,10 @@ export function Header() {
                       textShadow: "0.5px 0 0 currentColor",
                     }}
                     transition={{ duration: 0.2, ease: "easeOut" }}
-                    className={`relative transition-colors antialiased text-sm font-semibold font-body ${
+                    className={`relative transition-colors antialiased text-sm font-body ${
                       active
                         ? "text-primary font-bold"
-                        : "text-neutral-dark hover:text-primary"
+                        : "text-neutral-dark font-semibold hover:text-primary"
                     }`}
                   >
                     {item.label}
@@ -108,7 +116,7 @@ export function Header() {
                       className={`transition-colors antialiased font-body ${
                         active
                           ? "text-primary font-bold border-l-2 border-accent pl-3"
-                          : "text-neutral-dark hover:text-primary"
+                          : "text-neutral-dark font-semibold hover:text-primary"
                       }`}
                     >
                       {item.label}
