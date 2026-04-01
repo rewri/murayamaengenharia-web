@@ -177,7 +177,7 @@ export function QuoteChatbotModal() {
 
     if (companyEmail.trim()) {
       setSubmitError(
-        "Não foi possível enviar sua solicitação. Tente novamente.",
+        "Não foi possível enviar sua solicitação. Tente novamente em instantes.",
       );
       return;
     }
@@ -219,7 +219,7 @@ export function QuoteChatbotModal() {
       if (!response.success) {
         setSubmitError(
           response.message ??
-            "Não foi possível enviar seu pedido agora. Tente novamente.",
+            "Não foi possível enviar seu pedido agora. Tente novamente em instantes.",
         );
         return;
       }

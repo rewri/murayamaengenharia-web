@@ -30,7 +30,7 @@ export async function submitQuoteLead(
       success: false,
       message:
         responseData?.message ??
-        "Nao foi possivel enviar seu pedido agora. Tente novamente.",
+        "Não foi possível enviar seu pedido agora. Tente novamente em instantes.",
     };
   }
 

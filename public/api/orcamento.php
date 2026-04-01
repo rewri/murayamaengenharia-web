@@ -302,11 +302,11 @@ $sent = @mail($to, $subject, $emailBody, implode("\r\n", $headers));
 if (!$sent) {
     json_response(500, [
         'success' => false,
-        'message' => 'Nao foi possivel enviar agora. Tente novamente mais tarde.',
+        'message' => 'Não foi possível enviar agora. Tente novamente mais tarde.',
     ]);
 }
 
 json_response(200, [
     'success' => true,
-    'message' => 'Solicitacao enviada com sucesso.',
+    'message' => 'Solicitação enviada com sucesso!',
 ]);
