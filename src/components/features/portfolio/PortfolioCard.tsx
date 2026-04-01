@@ -11,7 +11,7 @@ interface PortfolioCardProps {
 }
 
 export default function PortfolioCard({
-  id: _id,
+  id,
   title,
   location,
   directory,
@@ -28,6 +28,7 @@ export default function PortfolioCard({
   return (
     <div
       onClick={() => navigate(url)}
+      data-project-id={id}
       className="flex h-full flex-1 flex-col rounded-xl overflow-hidden bg-white dark:bg-gray-800/50 shadow-sm border border-gray-200 dark:border-gray-800 transition-all duration-500 hover:shadow-lg hover:shadow-primary/15 focus:outline-none focus:ring-2 focus:ring-primary/40 cursor-pointer group"
       tabIndex={0}
       role="button"

@@ -2,11 +2,23 @@ import { contactsData } from "../../../config/contacts";
 import { useQuoteChatbot } from "../../../context/QuoteChatbotContext";
 
 export function FloatingWhatsAppButton() {
-  const whatsappUrl = contactsData.whatsapp.floatingButton.href;
+  const { phoneE164, message, href } = contactsData.whatsapp.floatingButton;
   const { isOpen } = useQuoteChatbot();
 
   const handleClick = () => {
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    const isMobile = /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(
+      navigator.userAgent,
+    );
+
+    if (isMobile) {
+      const appUrl = `whatsapp://send?phone=${phoneE164}&text=${encodeURIComponent(
+        message,
+      )}`;
+      window.location.href = appUrl;
+      return;
+    }
+
+    window.open(href, "_blank", "noopener,noreferrer");
   };
 
   return (

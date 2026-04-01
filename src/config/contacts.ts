@@ -74,7 +74,7 @@ export const contactsData = {
     floatingButton: {
       phoneE164: floatingWhatsappPhoneE164,
       message: floatingWhatsappMessage,
-      href: `https://web.whatsapp.com/send?phone=${floatingWhatsappPhoneE164}&text=${encodeURIComponent(
+      href: `https://wa.me/${floatingWhatsappPhoneE164}?text=${encodeURIComponent(
         floatingWhatsappMessage,
       )}`,
     },
