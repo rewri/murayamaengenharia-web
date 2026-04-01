@@ -36,13 +36,18 @@ export function PrivacyPolicy({ isOpen, onClose }: PrivacyPolicyProps) {
                 <h3 className="font-semibold mb-2">1. Coleta de dados</h3>
                 <p>
                   A Murayama Engenharia coleta dados pessoais de forma limitada,
-                  exclusivamente para fins estatísticos, por meio do Google
-                  Analytics.
+                  para fins estatisticos e para atendimento comercial quando
+                  voce solicita um orcamento pelo chat do site.
                 </p>
                 <p className="mt-2">
                   Os dados coletados podem incluir endereço IP anonimizado, tipo
                   de dispositivo, navegador, páginas acessadas e tempo de
                   permanência no site.
+                </p>
+                <p className="mt-2">
+                  No fluxo de solicitacao de orcamento, tambem coletamos as
+                  respostas do formulario, nome, telefone e e-mail (quando
+                  informado).
                 </p>
               </div>
 
@@ -53,6 +58,10 @@ export function PrivacyPolicy({ isOpen, onClose }: PrivacyPolicyProps) {
                   <li>Analisar o uso do site;</li>
                   <li>Melhorar a experiência de navegação;</li>
                   <li>Aperfeiçoar conteúdos e funcionalidades.</li>
+                  <li>
+                    Entrar em contato com o titular para retorno sobre
+                    solicitacoes de orcamento.
+                  </li>
                 </ul>
               </div>
 

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Phone } from "lucide-react";
+import { contactsData } from "../../../config/contacts";
 
 interface PhoneLinkProps {
   displayText?: string;
@@ -8,11 +9,11 @@ interface PhoneLinkProps {
 }
 
 export function PhoneLink({
-  displayText = "(14) 99775-4442",
+  displayText = contactsData.phones.primary.display,
   variant = "button",
   className = "",
 }: PhoneLinkProps) {
-  const phoneNumber = "tel:+55 (14) 99775-4442";
+  const phoneNumber = contactsData.phones.primary.telHref;
 
   if (variant === "text") {
     return (

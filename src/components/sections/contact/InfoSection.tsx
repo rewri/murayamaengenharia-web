@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { type ReactNode } from "react";
 import { fadeUp, stagger } from "../../../animations/motion";
+import { contactsData } from "../../../config/contacts";
 
 interface ContactItemProps {
   icon: LucideIcon;
@@ -63,6 +64,8 @@ function ContactItem({
 }
 
 export default function InfoSection() {
+  const { address, emails, phones, social } = contactsData;
+
   return (
     <motion.div
       variants={stagger}
@@ -77,47 +80,47 @@ export default function InfoSection() {
             <ContactItem
               icon={Phone}
               title="Telefone"
-              content="(14) 99775-4442"
-              href="https://wa.me/5514997754442"
+              content={phones.primary.display}
+              href={phones.primary.whatsappHref}
               className="mb-10"
             />
 
             <ContactItem
               icon={AtSign}
               title="E-mail"
-              content="contato@murayamaengenharia.com.br"
-              href="mailto:contato@murayamaengenharia.com.br"
+              content={emails.primary.address}
+              href={emails.primary.mailtoHref}
               className="mb-10"
             />
 
             <ContactItem
               icon={MapPin}
               title="Endereço"
-              content="Largo São José - Centro, Botucatu - SP"
+              content={address.displayShort}
               className="mb-10"
             />
 
             <ContactItem
               icon={Instagram}
               title="Instagram"
-              content="@murayamaengenharia"
-              href="https://instagram.com/murayamaengenharia"
+              content={social.instagram.handle}
+              href={social.instagram.href}
               className="mb-10"
             />
 
             <ContactItem
               icon={Facebook}
               title="Facebook"
-              content="Murayama Engenharia"
-              href="https://facebook.com/murayamaengenharia"
+              content={social.facebook.handle}
+              href={social.facebook.href}
               className="mb-10"
             />
 
             <ContactItem
               icon={Linkedin}
               title="LinkedIn"
-              content="Murayama Engenharia"
-              href="https://linkedin.com/company/murayama-engenharia"
+              content={social.linkedin.handle}
+              href={social.linkedin.href}
             />
           </div>
         </div>

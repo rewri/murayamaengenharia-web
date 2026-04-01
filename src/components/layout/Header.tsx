@@ -2,12 +2,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { navigationItems } from "../../config/navigation";
+import { useQuoteChatbot } from "../../context/QuoteChatbotContext";
 
 export function Header() {
   const menuItems = navigationItems;
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { openChatbot } = useQuoteChatbot();
 
   const isActive = (href: string) => {
     if (href === "/") {
@@ -69,14 +71,15 @@ export function Header() {
               );
             })}
           </nav>
-          <motion.a
-            href="#chatbot"
+          <motion.button
+            type="button"
+            onClick={openChatbot}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="bg-secondary text-white px-4 py-1.5 rounded text-sm font-medium hover:bg-accent-700 transition-colors shadow-md antialiased font-body"
           >
             SOLICITE UM ORÇAMENTO
-          </motion.a>
+          </motion.button>
         </div>
         <button
           className="md:hidden text-neutral-dark"
@@ -124,17 +127,20 @@ export function Header() {
                   </Link>
                 );
               })}
-              <motion.a
-                href="#chatbot"
+              <motion.button
+                type="button"
                 initial={{ x: -8, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.2, delay: menuItems.length * 0.1 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false);
+                  openChatbot();
+                }}
                 className="bg-accent text-white px-3 py-1.5 rounded text-sm font-medium text-center hover:bg-accent-700 transition-colors shadow-md mt-2 antialiased font-body"
               >
                 SOLICITE UM ORÇAMENTO
-              </motion.a>
+              </motion.button>
             </nav>
           </motion.div>
         )}

@@ -1,6 +1,9 @@
 import { Handshake } from "lucide-react";
+import { useQuoteChatbot } from "../../../context/QuoteChatbotContext";
 
 export default function CtaSection() {
+  const { openChatbot } = useQuoteChatbot();
+
   return (
     <div
       className="w-full bg-primary py-8 md:py-20"
@@ -28,7 +31,11 @@ export default function CtaSection() {
             </div>
           </div>
           <div className="flex-shrink-0 w-full md:w-auto">
-            <button className="w-full md:w-auto bg-accent hover:bg-sky-800 text-white py-6 px-8 rounded-lg transition-colors duration-200 whitespace-nowrap font-bold flex items-center justify-center md:justify-start gap-2 text-2xl">
+            <button
+              type="button"
+              onClick={openChatbot}
+              className="w-full md:w-auto bg-accent hover:bg-sky-800 text-white py-6 px-8 rounded-lg transition-colors duration-200 whitespace-nowrap font-bold flex items-center justify-center md:justify-start gap-2 text-2xl"
+            >
               SOLICITAR ORÇAMENTO
             </button>
           </div>

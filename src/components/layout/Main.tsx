@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { QuoteChatbotModal } from "../features/contact/QuoteChatbotModal";
 import { CookieBanner } from "../features/legal/CookieBanner";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
@@ -12,6 +13,7 @@ export function Main() {
       </main>
       <Footer />
       <CookieBanner />
+      <QuoteChatbotModal />
     </div>
   );
 }

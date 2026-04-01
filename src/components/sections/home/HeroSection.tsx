@@ -6,6 +6,7 @@ import {
 } from "framer-motion";
 import { Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { useQuoteChatbot } from "../../../context/QuoteChatbotContext";
 import { PhoneLink } from "../../features/contact/PhoneLink";
 
 interface HeroContent {
@@ -88,12 +89,13 @@ const Counter: React.FC<CounterProps> = ({
 };
 
 const HeroSection: React.FC = () => {
+  const { openChatbot } = useQuoteChatbot();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoLoaded, setVideoLoaded] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 768);
 
   const [selectedOption] = useState<number>(() =>
-    Math.floor(Math.random() * heroOptions.length)
+    Math.floor(Math.random() * heroOptions.length),
   );
 
   useEffect(() => {
@@ -120,15 +122,8 @@ const HeroSection: React.FC = () => {
     }
   }, [isMobile]);
 
-  const scrollToChatbot = (): void => {
-    const chatbotSection = document.querySelector("#chatbot");
-    if (chatbotSection) {
-      chatbotSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   const handleVideoError = (
-    event: React.SyntheticEvent<HTMLVideoElement, Event>
+    event: React.SyntheticEvent<HTMLVideoElement, Event>,
   ): void => {
     console.warn("Erro ao carregar vídeo:", event);
     setVideoLoaded(false);
@@ -244,7 +239,7 @@ const HeroSection: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <motion.button
-              onClick={scrollToChatbot}
+              onClick={openChatbot}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.95 }}
               className="w-full sm:w-full md:w-80 text-white border-2 border-white/80 font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-body
@@ -255,7 +250,7 @@ const HeroSection: React.FC = () => {
               Solicite um Orçamento
             </motion.button>
 
-            <PhoneLink displayText="(14) 99775-4442" variant="button" />
+            <PhoneLink variant="button" />
           </motion.div>
 
           <motion.div

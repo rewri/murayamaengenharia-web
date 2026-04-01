@@ -3,6 +3,7 @@ import "./App.css";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 import { FloatingWhatsAppButton } from "./components/layout/floating/FloatingWhatsAppButton";
 import { Main } from "./components/layout/Main";
+import { QuoteChatbotProvider } from "./context/QuoteChatbotContext";
 import { usePageTracking } from "./hooks/usePageTracking";
 import AboutPage from "./pages/About/AboutPage";
 import ContactPage from "./pages/Contact/ContactPage";
@@ -35,9 +36,11 @@ function AppContent() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
+    <QuoteChatbotProvider>
+      <BrowserRouter>
+        <AppContent />
+      </BrowserRouter>
+    </QuoteChatbotProvider>
   );
 }
 

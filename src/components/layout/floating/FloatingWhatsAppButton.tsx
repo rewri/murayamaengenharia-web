@@ -1,9 +1,22 @@
+import { contactsData } from "../../../config/contacts";
+import { useQuoteChatbot } from "../../../context/QuoteChatbotContext";
+
 export function FloatingWhatsAppButton() {
+  const whatsappUrl = contactsData.whatsapp.floatingButton.href;
+  const { isOpen } = useQuoteChatbot();
+
+  const handleClick = () => {
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+  };
+
   return (
-    <div className="fixed bottom-6 left-6 z-50">
+    <div className={`fixed bottom-6 left-6 ${isOpen ? "z-40" : "z-50"}`}>
       <button
+        type="button"
+        onClick={handleClick}
         className="bg-green-500 hover:bg-green-600 text-white rounded-full p-2 md:p-3 opacity-80 hover:opacity-100 shadow-lg transition-all duration-300 ease-in-out transform hover:scale-110"
         aria-label="Contato via WhatsApp"
+        title="Fale conosco pelo WhatsApp"
       >
         <svg
           width="24"

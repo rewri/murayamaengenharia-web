@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Check, Star } from "lucide-react";
 import { fadeUp, stagger } from "../../../animations/motion";
+import { contactsData } from "../../../config/contacts";
 
 export default function GoogleRatingSection() {
   return (
@@ -37,7 +38,7 @@ export default function GoogleRatingSection() {
 
         <motion.a
           variants={fadeUp}
-          href="https://share.google/824IGaTABhdoDURS1"
+          href={contactsData.external.googleReviewsHref}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block px-4 py-2.5 bg-accent hover:bg-sky-600 text-white rounded-full text-sm font-semibold transition-colors duration-200"

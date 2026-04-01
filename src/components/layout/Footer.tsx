@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { contactsData } from "../../config/contacts";
 import { navigationItems } from "../../config/navigation";
 import { PhoneLink } from "../features/contact/PhoneLink";
 import { CookiePolicy } from "../features/legal/CookiePolicy";
@@ -18,6 +19,8 @@ export function Footer() {
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
   const [showCookiePolicy, setShowCookiePolicy] = useState(false);
   const menuItems = navigationItems;
+  const { address, emails, phones, social } = contactsData;
+  const [emailLocalPart, emailDomain] = emails.primary.address.split("@");
 
   return (
     <>
@@ -79,26 +82,29 @@ export function Footer() {
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 mt-0.5 text-accent flex-shrink-0" />
                 <span>
-                  Largo São José
+                  {address.street}
                   <br />
-                  Centro, Botucatu - SP
+                  {address.neighborhood}, {address.city} - {address.state}
                   <br />
-                  CEP: 18602-113
+                  CEP: {address.zipCode}
                 </span>
               </div>
 
               {/* Telefone */}
               <div className="flex items-center gap-2 group">
-                <PhoneLink displayText="(14) 99775-4442" variant="text" />
+                <PhoneLink
+                  displayText={phones.primary.display}
+                  variant="text"
+                />
               </div>
 
               {/* Email com proteção antispam */}
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-accent flex-shrink-0" />
                 <span className="flex items-center">
-                  contato
+                  {emailLocalPart}
                   <AtSign className="h-3 w-3" />
-                  murayamaengenharia.com.br
+                  {emailDomain}
                 </span>
               </div>
 
@@ -106,7 +112,7 @@ export function Footer() {
               <div className="pt-4">
                 <div className="flex gap-3">
                   <a
-                    href="https://instagram.com/murayamaengenharia"
+                    href={social.instagram.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-accent hover:text-accent-300 transition-colors"
@@ -115,7 +121,7 @@ export function Footer() {
                     <Instagram className="w-8 h-8" />
                   </a>
                   <a
-                    href="https://facebook.com/murayamaengenharia"
+                    href={social.facebook.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-accent hover:text-accent-300 transition-colors"
@@ -124,7 +130,7 @@ export function Footer() {
                     <Facebook className="w-8 h-8" />
                   </a>
                   <a
-                    href="https://linkedin.com/company/murayama-engenharia"
+                    href={social.linkedin.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-accent hover:text-accent-300 transition-colors"
