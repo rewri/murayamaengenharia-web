@@ -19,11 +19,12 @@ export const quoteQuestions: QuoteQuestion[] = [
     options: [
       { value: "obra_completa", label: "Obra completa" },
       { value: "projeto_arquitetonico", label: "Projeto arquitetônico" },
+      { value: "projeto_estrutural", label: "Projeto estrutural" },
       {
         value: "projeto_complementar",
-        label: "Projeto complementar (elétrico / sanitário)",
+        label: "Projeto elétrico / hidráulico",
       },
-      { value: "incendio", label: "Projetos de combate a incêndio" },
+      { value: "incendio", label: "Projeto de combate a incêndio" },
       { value: "laudo_pericia", label: "Perícia ou laudo técnico" },
       { value: "manutencao_predial", label: "Manutenção predial" },
       { value: "outro", label: "Outro" },

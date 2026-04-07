@@ -195,7 +195,7 @@ if (isset($contact['email']) && is_string($contact['email']) && trim($contact['e
 }
 
 $allowedAnswers = [
-    'service' => ['projeto_arquitetonico', 'obra_completa', 'projeto_complementar', 'incendio', 'laudo_pericia', 'manutencao_predial', 'outro'],
+    'service' => ['projeto_arquitetonico', 'projeto_estrutural', 'obra_completa', 'projeto_complementar', 'incendio', 'laudo_pericia', 'manutencao_predial', 'outro'],
     'project_type' => ['residencial', 'comercial', 'industrial', 'institucional', 'outro'],
     'stage' => ['ideia', 'anteprojeto', 'projeto_aprovado', 'obra_andamento', 'reforma'],
     'goal' => ['construir', 'reformar', 'ampliar', 'regularizar', 'vistoriar'],
