@@ -1,9 +1,10 @@
 import type { ReactNode } from "react";
 import { createContext, useContext, useMemo, useState } from "react";
+import { trackEvent } from "../lib/analytics";
 
 interface QuoteChatbotContextValue {
   isOpen: boolean;
-  openChatbot: () => void;
+  openChatbot: (source?: string) => void;
   closeChatbot: () => void;
 }
 
@@ -18,10 +19,17 @@ interface QuoteChatbotProviderProps {
 export function QuoteChatbotProvider({ children }: QuoteChatbotProviderProps) {
   const [isOpen, setIsOpen] = useState(false);
 
+  function openChatbot(source = "unknown") {
+    setIsOpen(true);
+    trackEvent("quote_chatbot_open", {
+      source,
+    });
+  }
+
   const value = useMemo(
     () => ({
       isOpen,
-      openChatbot: () => setIsOpen(true),
+      openChatbot,
       closeChatbot: () => setIsOpen(false),
     }),
     [isOpen],

@@ -73,7 +73,7 @@ export function Header() {
           </nav>
           <motion.button
             type="button"
-            onClick={openChatbot}
+            onClick={() => openChatbot("header_desktop")}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="bg-secondary text-white px-4 py-1.5 rounded text-sm font-medium hover:bg-accent-700 transition-colors shadow-md antialiased font-body"
@@ -135,7 +135,7 @@ export function Header() {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => {
                   setOpen(false);
-                  openChatbot();
+                  openChatbot("header_mobile");
                 }}
                 className="bg-accent text-white px-3 py-1.5 rounded text-sm font-medium text-center hover:bg-accent-700 transition-colors shadow-md mt-2 antialiased font-body"
               >

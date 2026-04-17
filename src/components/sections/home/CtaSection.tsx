@@ -33,7 +33,7 @@ export default function CtaSection() {
           <div className="flex-shrink-0 w-full md:w-auto">
             <button
               type="button"
-              onClick={openChatbot}
+              onClick={() => openChatbot("home_cta_section")}
               className="w-full md:w-auto bg-accent hover:bg-sky-800 text-white py-6 px-8 rounded-lg transition-colors duration-200 whitespace-nowrap font-bold flex items-center justify-center md:justify-start gap-2 text-2xl"
             >
               SOLICITAR ORÇAMENTO

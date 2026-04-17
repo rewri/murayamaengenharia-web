@@ -1,11 +1,13 @@
 import { Check, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import {
+  FIRST_QUESTION_ID,
   quoteChatbotIntro,
   quoteChatbotTitle,
-  quoteQuestions,
+  quoteQuestionsMap,
 } from "../../../config/quoteChatbot";
 import { useQuoteChatbot } from "../../../context/QuoteChatbotContext";
+import { trackEvent } from "../../../lib/analytics";
 import { submitQuoteLead } from "../../../lib/quoteSubmission";
 import type { QuoteAnswers } from "../../../types/quoteChatbot";
 
@@ -34,11 +36,11 @@ function canSubmitNow() {
 
 export function QuoteChatbotModal() {
   const { isOpen, closeChatbot } = useQuoteChatbot();
-  const [currentStep, setCurrentStep] = useState(0);
+  const [stepStack, setStepStack] = useState<string[]>([FIRST_QUESTION_ID]);
   const [contactStage, setContactStage] = useState<"summary" | "form">(
     "summary",
   );
-  const [answers, setAnswers] = useState<Partial<QuoteAnswers>>({});
+  const [answers, setAnswers] = useState<QuoteAnswers>({});
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -46,42 +48,53 @@ export function QuoteChatbotModal() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isContactStep, setIsContactStep] = useState(false);
 
-  const totalSteps = quoteQuestions.length;
-  const isContactStep = currentStep >= totalSteps;
-  const currentQuestion = quoteQuestions[currentStep];
+  const currentQuestionId = stepStack[stepStack.length - 1];
+  const currentQuestion = quoteQuestionsMap[currentQuestionId];
+  const currentStepIndex = stepStack.length - 1;
+
+  const ESTIMATED_TOTAL_STEPS = 5;
 
   const progressPercent = useMemo(() => {
-    const stepsDone = Math.min(currentStep, totalSteps);
-    return Math.round((stepsDone / totalSteps) * 100);
-  }, [currentStep, totalSteps]);
+    if (isContactStep) return 100;
+    return Math.min(
+      Math.round((currentStepIndex / ESTIMATED_TOTAL_STEPS) * 100),
+      95,
+    );
+  }, [currentStepIndex, isContactStep]);
+
+  const selectedServiceLabel = useMemo(() => {
+    const serviceAnswer = answers[FIRST_QUESTION_ID];
+    if (!serviceAnswer) return null;
+    const serviceQuestion = quoteQuestionsMap[FIRST_QUESTION_ID];
+    if (!serviceQuestion) return null;
+    const option = serviceQuestion.options.find(
+      (opt) => opt.value === serviceAnswer,
+    );
+    return option?.label || null;
+  }, [answers]);
 
   const answersSummary = useMemo(
     () =>
-      quoteQuestions
-        .map((question) => {
-          const selectedValue = answers[question.id];
-
-          if (!selectedValue) {
-            return null;
-          }
-
+      stepStack
+        .map((questionId) => {
+          const question = quoteQuestionsMap[questionId];
+          if (!question) return null;
+          const selectedValue = answers[questionId];
+          if (!selectedValue) return null;
           const selectedOption = question.options.find(
             (option) => option.value === selectedValue,
           );
-
-          if (!selectedOption) {
-            return null;
-          }
-
+          if (!selectedOption) return null;
           return {
-            questionId: question.id,
+            questionId,
             prompt: question.prompt,
             answerLabel: selectedOption.label,
           };
         })
         .filter((item): item is NonNullable<typeof item> => item !== null),
-    [answers],
+    [stepStack, answers],
   );
 
   function isDesktopViewport() {
@@ -121,7 +134,7 @@ export function QuoteChatbotModal() {
       return;
     }
 
-    setCurrentStep(0);
+    setStepStack([FIRST_QUESTION_ID]);
     setContactStage("summary");
     setAnswers({});
     setName("");
@@ -131,23 +144,42 @@ export function QuoteChatbotModal() {
     setIsSubmitting(false);
     setSubmitError(null);
     setIsSuccess(false);
+    setIsContactStep(false);
   }, [isOpen]);
 
   if (!isOpen) {
     return null;
   }
 
-  function handleAnswer(questionId: keyof QuoteAnswers, value: string) {
+  function handleAnswer(questionId: string, value: string) {
     setAnswers((previous) => ({ ...previous, [questionId]: value }));
-    if (currentStep + 1 >= totalSteps) {
+    setSubmitError(null);
+
+    const question = quoteQuestionsMap[questionId];
+    if (!question) return;
+
+    const selectedOption = question.options.find(
+      (option) => option.value === value,
+    );
+
+    if (!selectedOption) return;
+
+    const nextQuestionId = selectedOption.nextId || question.defaultNextId;
+
+    if (nextQuestionId) {
+      setStepStack((previous) => [...previous, nextQuestionId]);
+    } else {
+      setIsContactStep(true);
       setContactStage("summary");
     }
-    setCurrentStep((previous) => previous + 1);
-    setSubmitError(null);
   }
 
   function handleBackStep() {
-    setCurrentStep((previous) => Math.max(0, previous - 1));
+    setStepStack((previous) => {
+      if (previous.length <= 1) return previous;
+      return previous.slice(0, -1);
+    });
+    setIsContactStep(false);
     setSubmitError(null);
   }
 
@@ -160,18 +192,32 @@ export function QuoteChatbotModal() {
     const trimmedName = name.trim();
     const trimmedEmail = email.trim();
 
+    trackEvent("quote_chatbot_submit_attempt", {
+      answered_questions: answersSummary.length,
+      has_email: Boolean(trimmedEmail),
+    });
+
     if (!trimmedName) {
       setSubmitError("Informe seu nome para continuar.");
+      trackEvent("quote_chatbot_submit_error", {
+        error_type: "name_missing",
+      });
       return;
     }
 
     if (!isPhoneValid(phone)) {
       setSubmitError("Informe um telefone válido com DDD.");
+      trackEvent("quote_chatbot_submit_error", {
+        error_type: "phone_invalid",
+      });
       return;
     }
 
     if (trimmedEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
       setSubmitError("Informe um e-mail válido ou deixe em branco.");
+      trackEvent("quote_chatbot_submit_error", {
+        error_type: "email_invalid",
+      });
       return;
     }
 
@@ -179,6 +225,9 @@ export function QuoteChatbotModal() {
       setSubmitError(
         "Não foi possível enviar sua solicitação. Tente novamente em instantes.",
       );
+      trackEvent("quote_chatbot_submit_error", {
+        error_type: "honeypot_filled",
+      });
       return;
     }
 
@@ -186,15 +235,19 @@ export function QuoteChatbotModal() {
       setSubmitError(
         "Você excedeu o limite de tentativas. Aguarde e tente novamente.",
       );
+      trackEvent("quote_chatbot_submit_error", {
+        error_type: "rate_limit",
+      });
       return;
     }
 
-    const allAnswered = quoteQuestions.every(
-      (question) => answers[question.id],
-    );
+    const allAnswered = stepStack.every((questionId) => answers[questionId]);
 
     if (!allAnswered) {
       setSubmitError("Responda todas as perguntas antes de enviar.");
+      trackEvent("quote_chatbot_submit_error", {
+        error_type: "questions_incomplete",
+      });
       return;
     }
 
@@ -221,19 +274,26 @@ export function QuoteChatbotModal() {
           response.message ??
             "Não foi possível enviar seu pedido agora. Tente novamente em instantes.",
         );
+        trackEvent("quote_chatbot_submit_error", {
+          error_type: "submission_rejected",
+        });
         return;
       }
 
-      if (typeof window.gtag === "function") {
-        window.gtag("event", "quote_chatbot_submit", {
-          event_category: "lead",
-          event_label: "orcamento",
-        });
-      }
+      trackEvent("quote_chatbot_submit_success", {
+        answered_questions: answersSummary.length,
+      });
+      trackEvent("generate_lead", {
+        lead_source: "site_chatbot",
+        lead_type: "orcamento",
+      });
 
       setIsSuccess(true);
     } catch {
       setSubmitError("Falha de conexão. Tente novamente em instantes.");
+      trackEvent("quote_chatbot_submit_error", {
+        error_type: "network_error",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -275,13 +335,21 @@ export function QuoteChatbotModal() {
               </button>
             </div>
 
-            <div className="mt-3">
+            <div className="mt-3 space-y-2">
               <div className="h-1.5 bg-white/25 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-accent transition-all duration-300"
                   style={{ width: `${progressPercent}%` }}
                 />
               </div>
+              {selectedServiceLabel && (
+                <p className="text-xs text-white/80 font-body">
+                  Serviço:{" "}
+                  <span className="font-semibold text-white">
+                    {selectedServiceLabel}
+                  </span>
+                </p>
+              )}
             </div>
           </div>
 
@@ -305,7 +373,7 @@ export function QuoteChatbotModal() {
               </div>
             ) : (
               <>
-                {currentStep === 0 && (
+                {stepStack.length === 1 && (
                   <div className="bg-white border border-border rounded-xl p-3 text-sm text-neutral-dark leading-relaxed">
                     {quoteChatbotIntro}
                   </div>
@@ -315,7 +383,7 @@ export function QuoteChatbotModal() {
                   <div className="space-y-3">
                     <div className="bg-neutral-200/70 border border-neutral-300 rounded-xl p-3">
                       <p className="text-xs uppercase tracking-wide text-accent font-semibold">
-                        Pergunta {currentStep + 1} de {totalSteps}
+                        Pergunta {currentStepIndex + 1}
                       </p>
                       <p className="mt-1 text-sm md:text-base font-semibold text-secondary">
                         {currentQuestion.prompt}
@@ -328,7 +396,7 @@ export function QuoteChatbotModal() {
                           key={option.value}
                           type="button"
                           onClick={() =>
-                            handleAnswer(currentQuestion.id, option.value)
+                            handleAnswer(currentQuestionId, option.value)
                           }
                           className="w-full text-left bg-white border border-border hover:border-accent hover:bg-cyan-50 rounded-xl px-3 py-3 text-sm text-neutral-dark transition-colors"
                         >
@@ -340,7 +408,7 @@ export function QuoteChatbotModal() {
                       ))}
                     </div>
 
-                    {currentStep > 0 && (
+                    {stepStack.length > 1 && (
                       <button
                         type="button"
                         onClick={handleBackStep}
@@ -385,7 +453,10 @@ export function QuoteChatbotModal() {
                     <div className="flex gap-2">
                       <button
                         type="button"
-                        onClick={() => setCurrentStep(totalSteps - 1)}
+                        onClick={() => {
+                          setContactStage("summary");
+                          handleBackStep();
+                        }}
                         className="w-1/3 rounded-lg border border-border py-2.5 text-sm font-semibold text-secondary hover:bg-neutral-warm transition-colors"
                       >
                         <ChevronLeft size={16} className="inline-block mr-1" />

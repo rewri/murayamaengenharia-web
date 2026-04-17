@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Phone } from "lucide-react";
 import { contactsData } from "../../../config/contacts";
+import { trackEvent } from "../../../lib/analytics";
 
 interface PhoneLinkProps {
   displayText?: string;
@@ -15,10 +16,17 @@ export function PhoneLink({
 }: PhoneLinkProps) {
   const phoneNumber = contactsData.phones.primary.telHref;
 
+  const handlePhoneClick = () => {
+    trackEvent("contact_phone_click", {
+      source: variant,
+    });
+  };
+
   if (variant === "text") {
     return (
       <a
         href={phoneNumber}
+        onClick={handlePhoneClick}
         className={`flex items-center gap-2 text-accent hover:text-accent-300 transition-colors ${className}`}
       >
         <Phone className="w-4 h-4 text-accent flex-shrink-0" />
@@ -30,6 +38,7 @@ export function PhoneLink({
   return (
     <motion.a
       href={phoneNumber}
+      onClick={handlePhoneClick}
       whileHover={{ y: -2 }}
       whileTap={{ scale: 0.95 }}
       className={`w-full sm:w-full md:w-80 text-white border-2 border-white/80 font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-body

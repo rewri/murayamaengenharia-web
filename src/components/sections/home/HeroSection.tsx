@@ -239,7 +239,7 @@ const HeroSection: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <motion.button
-              onClick={openChatbot}
+              onClick={() => openChatbot("home_hero")}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.95 }}
               className="w-full sm:w-full md:w-80 text-white border-2 border-white/80 font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-body

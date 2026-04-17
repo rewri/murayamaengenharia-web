@@ -1,8 +1,4 @@
-import { quoteQuestions } from "../config/quoteChatbot";
-
-export type QuoteQuestionId = (typeof quoteQuestions)[number]["id"];
-
-export type QuoteAnswers = Record<QuoteQuestionId, string>;
+export type QuoteAnswers = Record<string, string>;
 
 export interface QuoteLeadContact {
   name: string;

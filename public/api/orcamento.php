@@ -196,11 +196,23 @@ if (isset($contact['email']) && is_string($contact['email']) && trim($contact['e
 
 $allowedAnswers = [
     'service' => ['projeto_arquitetonico', 'projeto_estrutural', 'obra_completa', 'projeto_complementar', 'incendio', 'laudo_pericia', 'manutencao_predial', 'outro'],
-    'project_type' => ['residencial', 'comercial', 'industrial', 'institucional', 'outro'],
-    'stage' => ['ideia', 'anteprojeto', 'projeto_aprovado', 'obra_andamento', 'reforma'],
-    'goal' => ['construir', 'reformar', 'ampliar', 'regularizar', 'vistoriar'],
-    'location' => ['botucatu', 'regiao', 'outro_estado'],
+    'obra_tipo' => ['residencial', 'comercial', 'industrial', 'institucional', 'outro'],
+    'obra_stage' => ['ideia', 'anteprojeto', 'projeto_aprovado', 'obra_andamento', 'reforma', 'outro'],
+    'arq_objetivo' => ['novo', 'atualizar_planta', 'regularizar', 'reforma', 'outro'],
+    'arq_projeto_tipo' => ['residencial', 'comercial', 'industrial', 'institucional', 'outro'],
+    'estrutural_tipo' => ['novo', 'reforma_ampliacao', 'calculo_revisao', 'laudo_estrutural', 'outro'],
+    'estrutural_empreendimento' => ['residencial', 'comercial', 'industrial', 'institucional', 'outro'],
+    'complementar_tipo' => ['eletrico', 'hidraulico', 'eletrico_hidraulico', 'ar_condicionado', 'outro'],
+    'complementar_empreendimento' => ['residencial', 'comercial', 'industrial', 'institucional', 'outro'],
+    'incendio_tipo' => ['avcb', 'clcb', 'adequacao', 'analise_conformidade', 'laudo_tecnico', 'orcamento', 'outro'],
+    'incendio_sistema' => ['sprinklers', 'hidrante', 'extintores', 'alarme_deteccao', 'sistema_completo', 'outro'],
+    'pericia_tipo' => ['patologia', 'vistoria_pre_compra', 'avaliacao_estrutural', 'parecer_tecnico', 'pericia_judicial', 'outro'],
+    'pericia_profundidade' => ['parecer_simples', 'laudo_detalhado', 'outro'],
+    'manutencao_periodicidade' => ['pontual', 'contrato_periodo', 'permanente', 'outro'],
+    'manutencao_tipo' => ['residencial', 'comercial', 'industrial', 'institucional', 'outro'],
+    'project_type_generic' => ['residencial', 'comercial', 'industrial', 'institucional', 'outro'],
     'area_range' => ['ate_100', '101_300', '301_1000', 'acima_1000', 'nao_sei'],
+    'location' => ['botucatu', 'regiao', 'outro_estado'],
     'start_deadline' => ['imediato', '1_3_meses', '3_6_meses', 'mais_6_meses'],
     'budget_range' => ['ate_100k', '100_300k', '300k_1m', 'acima_1m', 'prefiro_nao_informar'],
 ];
@@ -211,32 +223,49 @@ if (!is_array($answers)) {
 }
 
 $normalizedAnswers = [];
-foreach ($allowedAnswers as $questionId => $validValues) {
-    $value = $answers[$questionId] ?? null;
-
-    if (!is_string($value) || !in_array($value, $validValues, true)) {
+foreach ($answers as $questionId => $value) {
+    if (!is_string($questionId) || !is_string($value)) {
         json_response(400, [
             'success' => false,
-            'message' => 'Respostas incompletas ou invalidas.',
+            'message' => 'Formato de respostas invalido.',
         ]);
+    }
+
+    if (!isset($allowedAnswers[$questionId])) {
+        json_response(400, ['success' => false, 'message' => 'Pergunta nao reconhecida.']);
+    }
+
+    if (!in_array($value, $allowedAnswers[$questionId], true)) {
+        json_response(400, ['success' => false, 'message' => 'Resposta invalida.']);
     }
 
     $normalizedAnswers[$questionId] = $value;
 }
 
-$extraAnswerKeys = array_diff(array_keys($answers), array_keys($allowedAnswers));
-if (count($extraAnswerKeys) > 0) {
-    json_response(400, ['success' => false, 'message' => 'Formato de respostas invalido.']);
+if (count($normalizedAnswers) === 0) {
+    json_response(400, ['success' => false, 'message' => 'Nenhuma resposta fornecida.']);
 }
 
 $answerLabels = [
-    'service' => 'Servico',
-    'project_type' => 'Tipo de empreendimento',
-    'stage' => 'Etapa atual',
-    'goal' => 'Objetivo principal',
-    'location' => 'Localizacao',
-    'area_range' => 'Faixa de area',
-    'start_deadline' => 'Prazo para inicio',
+    'service' => 'Serviço',
+    'obra_tipo' => 'Tipo de empreendimento (obra)',
+    'obra_stage' => 'Etapa da obra',
+    'arq_objetivo' => 'Objetivo do projeto arquitetônico',
+    'arq_projeto_tipo' => 'Tipo de empreendimento (arquitetura)',
+    'estrutural_tipo' => 'Tipo de serviço estrutural',
+    'estrutural_empreendimento' => 'Tipo de empreendimento (estrutura)',
+    'complementar_tipo' => 'Projeto complementar',
+    'complementar_empreendimento' => 'Tipo de empreendimento (complementar)',
+    'incendio_tipo' => 'Tipo de demanda (combate a incêndio)',
+    'incendio_sistema' => 'Sistema de combate a incêndio',
+    'pericia_tipo' => 'Tipo de perícia ou laudo',
+    'pericia_profundidade' => 'Nível de detalhamento (perícia)',
+    'manutencao_periodicidade' => 'Regime de manutenção',
+    'manutencao_tipo' => 'Tipo de empreendimento (manutenção)',
+    'project_type_generic' => 'Tipo de empreendimento',
+    'area_range' => 'Faixa de área',
+    'location' => 'Localização',
+    'start_deadline' => 'Prazo para início',
     'budget_range' => 'Faixa de investimento',
 ];
 

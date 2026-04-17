@@ -1,5 +1,6 @@
 import { contactsData } from "../../../config/contacts";
 import { useQuoteChatbot } from "../../../context/QuoteChatbotContext";
+import { trackEvent } from "../../../lib/analytics";
 
 export function FloatingWhatsAppButton() {
   const { phoneE164, message, href } = contactsData.whatsapp.floatingButton;
@@ -9,6 +10,11 @@ export function FloatingWhatsAppButton() {
     const isMobile = /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(
       navigator.userAgent,
     );
+
+    trackEvent("contact_whatsapp_click", {
+      source: "floating_button",
+      device_type: isMobile ? "mobile" : "desktop",
+    });
 
     if (isMobile) {
       const appUrl = `whatsapp://send?phone=${phoneE164}&text=${encodeURIComponent(

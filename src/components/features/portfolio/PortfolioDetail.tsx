@@ -2,6 +2,7 @@ import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { allConstructions } from "../../../config/portfolio";
+import { trackEvent } from "../../../lib/analytics";
 import CtaSection from "../../sections/home/CtaSection";
 
 // Função helper para shuffle determinístico baseado em seed (pura)
@@ -358,7 +359,14 @@ export default function PortfolioDetail({
                 return (
                   <button
                     key={project.id}
-                    onClick={() => navigate(projUrl)}
+                    onClick={() => {
+                      trackEvent("portfolio_project_click", {
+                        project_id: project.id,
+                        project_category: project.category,
+                        source: "related_projects",
+                      });
+                      navigate(projUrl);
+                    }}
                     className="relative group aspect-square rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-700 hover:shadow-lg transition-shadow duration-300"
                   >
                     <img
@@ -386,7 +394,12 @@ export default function PortfolioDetail({
 
           <div className="text-center">
             <button
-              onClick={() => navigate("/obras")}
+              onClick={() => {
+                trackEvent("portfolio_view_all_click", {
+                  source: "portfolio_detail",
+                });
+                navigate("/obras");
+              }}
               className="flex items-center gap-2 min-w-[84px] max-w-[480px] cursor-pointer justify-center overflow-hidden rounded-lg h-12 px-8 bg-primary text-white text-base font-bold tracking-wide hover:bg-primary/90 transition-colors mx-auto"
             >
               <span className="truncate">Ver Todos os Projetos</span>
