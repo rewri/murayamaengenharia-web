@@ -1,36 +1,36 @@
 export const comercial = [
   {
-    id: "2",
+    id: "comercial-1",
     title: "Clínica Odontológica",
     location: "Botucatu, SP",
     directory: "comerciais/clinica_odontologica",
     category: "Comercial",
     description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+      "Projeto desenvolvido com soluções funcionais e design estratégico, garantindo conforto, eficiência e valorização do negócio.",
     client: "Clínica Odontológica",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },
   {
-    id: "3",
+    id: "comercial-2",
     title: "Salas Comerciais",
     location: "Botucatu, SP",
     directory: "comerciais/salas_comerciais",
     category: "Comercial",
     description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+      "Projeto executado com abordagem moderna e foco em usabilidade, assegurando praticidade, desempenho e satisfação dos usuários.",
     client: "Salas Comerciais",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },
   {
-    id: "18",
+    id: "comercial-3",
     title: "Associação Atlética Ferroviária",
     location: "Botucatu, SP",
     directory: "comerciais/aaf",
     category: "Comercial",
     description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+      "Projeto conduzido com conceito inovador e atenção aos fluxos, garantindo funcionalidade, eficiência e valorização do espaço.",
     client: "AAF",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],

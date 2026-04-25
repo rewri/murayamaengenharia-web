@@ -6,7 +6,7 @@ export const momentum = [
     directory: "momentum/benevides",
     category: "Momentum",
     description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+      "Projeto executado com alto padrão técnico e cuidado minucioso, garantindo solidez e satisfação do cliente.",
     client: "Benevides",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
@@ -18,7 +18,7 @@ export const momentum = [
     directory: "momentum/carvalho",
     category: "Momentum",
     description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+      "Projeto conduzido com abordagem moderna e atenção criteriosa, assegurando eficiência e confiança ao cliente.",
     client: "Carvalho",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
@@ -30,7 +30,7 @@ export const momentum = [
     directory: "momentum/diversos",
     category: "Momentum",
     description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+      "Projeto desenvolvido com soluções inteligentes e olhar detalhista, garantindo desempenho e satisfação do cliente.",
     client: "Diversos",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
@@ -42,7 +42,7 @@ export const momentum = [
     directory: "momentum/fernandes",
     category: "Momentum",
     description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+      "Projeto realizado com precisão construtiva e atenção refinada, assegurando qualidade e confiança ao cliente.",
     client: "Fernandes",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
@@ -54,7 +54,7 @@ export const momentum = [
     directory: "momentum/gray",
     category: "Momentum",
     description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+      "Projeto elaborado com técnica apurada e foco minucioso, garantindo eficiência e satisfação do cliente.",
     client: "Gray",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
@@ -66,7 +66,7 @@ export const momentum = [
     directory: "momentum/jacques",
     category: "Momentum",
     description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+      "Projeto estruturado com método rigoroso e atenção constante, assegurando desempenho e tranquilidade ao cliente.",
     client: "Jacques",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
@@ -78,7 +78,7 @@ export const momentum = [
     directory: "momentum/luiz",
     category: "Momentum",
     description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+      "Projeto executado com padrão elevado e cuidado dedicado, garantindo segurança e satisfação do cliente.",
     client: "Luiz",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
@@ -90,7 +90,7 @@ export const momentum = [
     directory: "momentum/maciel",
     category: "Momentum",
     description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+      "Projeto conduzido com excelência operacional e atenção minuciosa, assegurando qualidade e confiança ao cliente.",
     client: "Maciel",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
@@ -102,7 +102,7 @@ export const momentum = [
     directory: "momentum/oliveira",
     category: "Momentum",
     description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+      "Projeto desenvolvido com abordagem eficiente e foco detalhado, garantindo desempenho e satisfação do cliente.",
     client: "Oliveira",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
@@ -114,7 +114,7 @@ export const momentum = [
     directory: "momentum/pires",
     category: "Momentum",
     description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+      "Projeto realizado com alto nível construtivo e atenção cuidadosa, assegurando qualidade e tranquilidade ao cliente.",
     client: "Pires",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
@@ -126,7 +126,7 @@ export const momentum = [
     directory: "momentum/pressotto",
     category: "Momentum",
     description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+      "Projeto elaborado com soluções modernas e atenção criteriosa, garantindo eficiência e satisfação do cliente.",
     client: "Pressotto",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
@@ -138,7 +138,7 @@ export const momentum = [
     directory: "momentum/silva",
     category: "Momentum",
     description:
-      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+      "Projeto conduzido com técnica avançada e cuidado nos detalhes, assegurando qualidade e confiança ao cliente.",
     client: "Silva",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
