@@ -23,4 +23,16 @@ export const parqueDasCascatas = [
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
   },
+  {
+    id: "3",
+    title: "Zillo",
+    location: "Botucatu, SP",
+    directory: "parque_das_cascatas/zillo",
+    category: "Parque das Cascatas",
+    description:
+      "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
+    client: "Zillo",
+    conclusion_year: 2026,
+    services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+  },
 ];
