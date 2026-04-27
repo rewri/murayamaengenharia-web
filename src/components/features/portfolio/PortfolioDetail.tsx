@@ -54,7 +54,7 @@ export default function PortfolioDetail({
   categorySlug,
   directory,
   client = "Confidencial",
-  completionYear = 2024,
+  // completionYear = 2024,
   description = "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
   services = ["Gerenciamento", "Projeto Estrutural", "Consultoria"],
 }: PortfolioDetailProps) {
@@ -71,7 +71,7 @@ export default function PortfolioDetail({
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23e5e7eb' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='16' fill='%239ca3af'%3EImagem não disponível%3C/text%3E%3C/svg%3E";
 
   // Formatar ano para string
-  const completionYearString = completionYear ? String(completionYear) : "2024";
+  // const completionYearString = completionYear ? String(completionYear) : "2024";
 
   // Gerar um seed aleatório uma única vez ao montar o componente
   const [randomSeed] = useState(() => Math.random().toString(36));
@@ -287,14 +287,14 @@ export default function PortfolioDetail({
                       {location}
                     </span>
                   </li>
-                  <li className="flex justify-between items-start gap-4">
+                  {/* <li className="flex justify-between items-start gap-4">
                     <span className="font-semibold text-gray-700 dark:text-gray-200 whitespace-nowrap">
                       Conclusão:
                     </span>
                     <span className="text-gray-600 dark:text-gray-300 text-right">
                       {completionYearString}
                     </span>
-                  </li>
+                  </li> */}
                 </ul>
                 <hr className="my-6 border-gray-200 dark:border-gray-700" />
                 <div>
