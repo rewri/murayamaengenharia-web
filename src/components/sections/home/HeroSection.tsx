@@ -108,7 +108,7 @@ const HeroSection: React.FC = () => {
 
   useEffect(() => {
     const video = videoRef.current;
-    if (video && !isMobile) {
+    if (video) {
       const handleLoadedData = () => {
         setVideoLoaded(true);
         video.play().catch((error) => {
@@ -155,30 +155,34 @@ const HeroSection: React.FC = () => {
             backgroundSize: "8px 8px",
           }}
         />
-        {!isMobile && (
-          <video
-            ref={videoRef}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Cpath fill='%230A2B42' d='M0 0h1200v600H0z'/%3E%3C/svg%3E"
-            className={`w-full h-full object-cover transition-opacity duration-500 ease-in-out ${
-              videoLoaded ? "opacity-100" : "opacity-0"
-            }`}
-            onError={handleVideoError}
-          >
-            <source
-              src="/static/videos/video-optimized-720p.mp4"
-              type="video/mp4"
-            />
-            <source src="/static/videos/video-optimized.mp4" type="video/mp4" />
-            Seu navegador não suporta reprodução de vídeo.
-          </video>
-        )}
-        {/* Fallback background se o vídeo não carregar ou em mobile */}
-        {(!videoLoaded || isMobile) && (
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Cpath fill='%230A2B42' d='M0 0h1200v600H0z'/%3E%3C/svg%3E"
+          className={`w-full h-full object-cover transition-opacity duration-500 ease-in-out ${
+            videoLoaded ? "opacity-100" : "opacity-0"
+          }`}
+          onError={handleVideoError}
+        >
+          {isMobile ? (
+            <source src="/static/videos/video-mobile.mp4" type="video/mp4" />
+          ) : (
+            <>
+              <source src="/static/videos/video-desktop.mp4" type="video/mp4" />
+              <source
+                src="/static/videos/video-original.mp4"
+                type="video/mp4"
+              />
+            </>
+          )}
+          Seu navegador não suporta reprodução de vídeo.
+        </video>
+        {/* Fallback background se o vídeo não carregar */}
+        {!videoLoaded && (
           <div
             className="absolute inset-0 z-10 bg-gradient-to-br from-primary-600 to-accent-500"
             style={{
