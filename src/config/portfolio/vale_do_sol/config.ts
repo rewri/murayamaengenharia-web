@@ -10,6 +10,7 @@ export const valeDolSol = [
     client: "Amando de Barros",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    imageCount: 4,
     video: null,
   },
 ];
