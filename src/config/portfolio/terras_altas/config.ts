@@ -10,6 +10,7 @@ export const terrasAltas = [
     client: "Nakao",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    imageCount: 3,
     video: null,
   },
 ];

@@ -10,6 +10,7 @@ export const momentum = [
     client: "Benevides",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    imageCount: 13,
     video: null,
   },
   {
@@ -23,6 +24,7 @@ export const momentum = [
     client: "Carvalho",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    imageCount: 16,
     video: null,
   },
   {
@@ -36,6 +38,7 @@ export const momentum = [
     client: "Diversos",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    imageCount: 64,
     video: null,
   },
   {
@@ -49,6 +52,7 @@ export const momentum = [
     client: "Fernandes",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    imageCount: 10,
     video: null,
   },
   {
@@ -62,6 +66,7 @@ export const momentum = [
     client: "Gray",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    imageCount: 53,
     video: null,
   },
   {
@@ -75,6 +80,7 @@ export const momentum = [
     client: "Jacques",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    imageCount: 9,
     video: null,
   },
   {
@@ -88,6 +94,7 @@ export const momentum = [
     client: "Luiz",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    imageCount: 43,
     video: null,
   },
   {
@@ -101,6 +108,7 @@ export const momentum = [
     client: "Maciel",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    imageCount: 15,
     video: null,
   },
   {
@@ -114,6 +122,7 @@ export const momentum = [
     client: "Oliveira",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    imageCount: 32,
     video: null,
   },
   {
@@ -127,6 +136,7 @@ export const momentum = [
     client: "Pires",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    imageCount: 3,
     video: null,
   },
   {
@@ -140,6 +150,7 @@ export const momentum = [
     client: "Pressotto",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    imageCount: 14,
     video: null,
   },
   {
@@ -153,6 +164,7 @@ export const momentum = [
     client: "Silva",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    imageCount: 11,
     video: null,
   },
 ];

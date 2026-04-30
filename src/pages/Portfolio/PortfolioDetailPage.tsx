@@ -34,6 +34,7 @@ export default function PortfolioDetailPage() {
       completionYear={project.conclusion_year}
       services={project.services}
       video={project.video}
+      imageCount={project.imageCount || 0}
     />
   );
 }

@@ -6,9 +6,9 @@ import { Header } from "./Header";
 
 export function Main() {
   return (
-    <div className="min-h-screen flex flex-col bg-background-light font-body text-neutral-dark">
+    <div className="min-h-screen flex flex-col bg-background-light font-body text-neutral-dark overflow-x-hidden">
       <Header />
-      <main className="pt-16 flex-1 w-full">
+      <main className="pt-16 flex-1 w-full overflow-x-hidden">
         <Outlet />
       </main>
       <Footer />

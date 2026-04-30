@@ -51,6 +51,7 @@ interface PortfolioDetailProps {
   }>;
   services?: string[];
   video?: string | null;
+  imageCount: number;
 }
 
 export default function PortfolioDetail({
@@ -64,6 +65,7 @@ export default function PortfolioDetail({
   description = "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
   services = ["Gerenciamento", "Projeto Estrutural", "Consultoria"],
   video = null,
+  imageCount = 0,
 }: PortfolioDetailProps) {
   const navigate = useNavigate();
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
@@ -83,9 +85,11 @@ export default function PortfolioDetail({
   // Gerar um seed aleatório uma única vez ao montar o componente
   const [randomSeed] = useState(() => Math.random().toString(36));
 
-  // Gerar galeria com até 50 imagens possíveis
+  // Gerar galeria - tenta carregar até imageCount imagens
   const imageGallery = useMemo(() => {
-    return Array.from({ length: 50 }, (_, i) => {
+    if (imageCount <= 0) return [];
+    // Tenta carregar até imageCount imagens (numeradas de 01 a imageCount)
+    return Array.from({ length: imageCount }, (_, i) => {
       const paddedIndex = String(i + 1).padStart(2, "0");
       return {
         thumb: `/static/images/porfolio/${directory}/thumb/${paddedIndex}-thumb.webp`,
@@ -93,7 +97,7 @@ export default function PortfolioDetail({
         index: i,
       };
     });
-  }, [directory]);
+  }, [directory, imageCount]);
 
   const handleNextImage = () => {
     const validImages = imageGallery.filter((img) =>
@@ -143,10 +147,10 @@ export default function PortfolioDetail({
   }, [directory, randomSeed]);
 
   return (
-    <main className="flex-grow w-full">
+    <main className="flex-grow w-full overflow-x-hidden">
       {/* Hero Image - Full Width */}
-      <div className="w-full mb-0">
-        <div className="relative overflow-hidden min-h-[400px] flex flex-col justify-end">
+      <div className="w-full mb-0 overflow-x-hidden">
+        <div className="relative overflow-x-hidden overflow-y-visible min-h-[400px] flex flex-col justify-end">
           <img
             src={`/static/images/porfolio/${directory}/hero.webp`}
             sizes="100vw"
@@ -157,7 +161,7 @@ export default function PortfolioDetail({
             }}
           />
           <div
-            className="absolute inset-0 z-10"
+            className="absolute inset-0 z-10 overflow-hidden"
             style={{
               backgroundImage: `
                 linear-gradient(
@@ -172,6 +176,7 @@ export default function PortfolioDetail({
                 )
               `,
               backgroundSize: "8px 8px",
+              backgroundAttachment: "fixed",
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
@@ -348,7 +353,7 @@ export default function PortfolioDetail({
       </div>
 
       {/* CTA Section */}
-      <section className="w-full bg-gray-50 dark:bg-gray-900/50 py-16 mt-0 lg:mt-16">
+      <section className="w-full overflow-x-hidden bg-gray-50 dark:bg-gray-900/50 py-16 mt-0 lg:mt-16">
         <div className="container mx-auto px-4 mb-0">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">

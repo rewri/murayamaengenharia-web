@@ -10,6 +10,7 @@ export const comercial = [
     client: "Clínica Odontológica",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    imageCount: 9,
     video: null,
   },
   {
@@ -23,6 +24,7 @@ export const comercial = [
     client: "Salas Comerciais",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    imageCount: 17,
     video: null,
   },
   {
@@ -36,6 +38,7 @@ export const comercial = [
     client: "AAF",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    imageCount: 32,
     video: null,
   },
 ];

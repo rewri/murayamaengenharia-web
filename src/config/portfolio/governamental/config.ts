@@ -10,6 +10,7 @@ export const governamental = [
     client: "Creche",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    imageCount: 16,
     video: null,
   },
 ];
