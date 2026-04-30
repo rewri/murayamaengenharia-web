@@ -33,6 +33,7 @@ export default function PortfolioDetailPage() {
       client={project.client}
       completionYear={project.conclusion_year}
       services={project.services}
+      video={project.video}
     />
   );
 }

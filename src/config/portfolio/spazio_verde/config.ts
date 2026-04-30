@@ -10,6 +10,7 @@ export const spazioVerde = [
     client: "Castilho",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    video: null,
   },
   {
     id: "spazioVerde-2",
@@ -22,6 +23,7 @@ export const spazioVerde = [
     client: "Favalli",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    video: null,
   },
   {
     id: "spazioVerde-3",
@@ -34,5 +36,6 @@ export const spazioVerde = [
     client: "Oliveira",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    video: null,
   },
 ];

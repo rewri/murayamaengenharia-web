@@ -10,6 +10,7 @@ export const industrial = [
     client: "Caio Induscar",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    video: null,
   },
   {
     id: "industrial-2",
@@ -22,6 +23,7 @@ export const industrial = [
     client: "Moura Leite",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    video: null,
   },
   {
     id: "industrial-3",
@@ -34,5 +36,6 @@ export const industrial = [
     client: "Vetroresina",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    video: null,
   },
 ];

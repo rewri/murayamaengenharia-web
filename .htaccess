@@ -1,0 +1,108 @@
+# ========================================
+
+# React Router - Redirecionar para index.html
+
+# ========================================
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  
+  # Não reescrever /api/ e /static/
+  RewriteCond %{REQUEST_URI} !^/api/
+  RewriteCond %{REQUEST_URI} !^/static/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [QSA,L]
+</IfModule>
+
+# ========================================
+
+# Compressão GZIP
+
+# ========================================
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/xml
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE application/xhtml+xml
+  AddOutputFilterByType DEFLATE application/rss+xml
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/x-javascript
+  AddOutputFilterByType DEFLATE application/x-font-ttf
+  AddOutputFilterByType DEFLATE application/x-font-opentype
+  AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ========================================
+
+# Cache de Arquivos Estáticos
+
+# ========================================
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  
+  # Imagens e vídeos (1 ano)
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType video/mp4 "access plus 1 year"
+  
+  # CSS e JavaScript (1 ano)
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+  
+  # Fontes (1 ano)
+  ExpiresByType application/x-font-ttf "access plus 1 year"
+  ExpiresByType application/x-font-opentype "access plus 1 year"
+  ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  
+  # HTML (30 minutos)
+  ExpiresByType text/html "access plus 30 minutes"
+  
+  # Padrão
+  ExpiresDefault "access plus 2 days"
+</IfModule>
+
+# ========================================
+
+# MIME Types e Media
+# ========================================
+
+<Files *.mp4>
+  AddType video/mp4 .mp4
+  Header set Accept-Ranges bytes
+  Header set Cache-Control "public, max-age=3600"
+</Files>
+
+# ========================================
+
+# HTTPS - Redirecionar para SSL
+
+# ========================================
+
+<IfModule mod_rewrite.c>
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# ========================================
+
+# Headers de Segurança
+
+# ========================================
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-XSS-Protection "1; mode=block"
+</IfModule>

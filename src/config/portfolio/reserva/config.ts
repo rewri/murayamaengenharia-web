@@ -10,6 +10,7 @@ export const reserva = [
     client: "Filho",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    video: null,
   },
   {
     id: "reserva-2",
@@ -22,6 +23,7 @@ export const reserva = [
     client: "Menegon",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    video: null,
   },
   {
     id: "reserva-3",
@@ -34,5 +36,6 @@ export const reserva = [
     client: "Passarelli",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    video: null,
   },
 ];

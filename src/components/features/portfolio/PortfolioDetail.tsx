@@ -1,9 +1,14 @@
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { allConstructions } from "../../../config/portfolio";
+import {
+  allConstructions,
+  generateConstructionSlug,
+  portfolioCategories,
+} from "../../../config/portfolio";
 import { trackEvent } from "../../../lib/analytics";
 import CtaSection from "../../sections/home/CtaSection";
+import VideoCard from "./VideoCard";
 
 // Função helper para shuffle determinístico baseado em seed (pura)
 function seededShuffle<T>(array: T[], seed: string): T[] {
@@ -45,6 +50,7 @@ interface PortfolioDetailProps {
     description: string;
   }>;
   services?: string[];
+  video?: string | null;
 }
 
 export default function PortfolioDetail({
@@ -57,6 +63,7 @@ export default function PortfolioDetail({
   // completionYear = 2024,
   description = "Projeto desenvolvido com excelência técnica e atenção aos detalhes, garantindo qualidade e satisfação do cliente.",
   services = ["Gerenciamento", "Projeto Estrutural", "Consultoria"],
+  video = null,
 }: PortfolioDetailProps) {
   const navigate = useNavigate();
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
@@ -147,6 +154,24 @@ export default function PortfolioDetail({
             className="absolute inset-0 w-full h-full object-cover"
             onError={(e) => {
               (e.target as HTMLImageElement).src = placeholderImage;
+            }}
+          />
+          <div
+            className="absolute inset-0 z-10"
+            style={{
+              backgroundImage: `
+                linear-gradient(
+                  45deg,
+                  rgba(0, 0, 0, 0.08) 1px,
+                  transparent 1px,
+                  transparent 50%,
+                  rgba(0, 0, 0, 0.08) 50%,
+                  rgba(0, 0, 0, 0.08) calc(50% + 1px),
+                  transparent calc(50% + 1px),
+                  transparent
+                )
+              `,
+              backgroundSize: "8px 8px",
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
@@ -256,6 +281,9 @@ export default function PortfolioDetail({
                           return newSet;
                         });
                       }}
+                      onError={() => {
+                        // Silencia erros 404 de imagens que não existem
+                      }}
                     />
                   ))}
                 </div>
@@ -265,8 +293,8 @@ export default function PortfolioDetail({
             </div>
 
             {/* Sidebar */}
-            <aside className="lg:col-span-1 lg:sticky lg:top-24 h-fit mb-12 lg:mb-0">
-              <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-6 bg-white dark:bg-gray-800/50 shadow-sm">
+            <aside className="lg:col-span-1 lg:sticky lg:top-24 h-fit mt-8 mb-12 lg:mt-0 lg:mb-0">
+              <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-6 bg-white dark:bg-gray-800/50 shadow-sm mb-6">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
                   Ficha Técnica
                 </h3>
@@ -313,13 +341,14 @@ export default function PortfolioDetail({
                   </div>
                 </div>
               </div>
+              <VideoCard video={video} />
             </aside>
           </div>
         </div>
       </div>
 
       {/* CTA Section */}
-      <section className="w-full bg-gray-50 dark:bg-gray-900/50 py-16 mt-16">
+      <section className="w-full bg-gray-50 dark:bg-gray-900/50 py-16 mt-0 lg:mt-16">
         <div className="container mx-auto px-4 mb-0">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
@@ -344,22 +373,19 @@ export default function PortfolioDetail({
                 ) {
                   return null;
                 }
-                const projSlug = project.title
-                  .toLowerCase()
-                  .normalize("NFD")
-                  .replace(/[\u0300-\u036f]/g, "")
-                  .replace(/\s+/g, "-");
-                const projCategorySlug = project.category
-                  .toLowerCase()
-                  .normalize("NFD")
-                  .replace(/[\u0300-\u036f]/g, "")
-                  .replace(/\s+/g, "-");
-                const projUrl = `/obras/${projCategorySlug}/${projSlug}-${project.id}`;
+                const projSlug = generateConstructionSlug(project.title);
+                const projCategoryConfig = portfolioCategories.find(
+                  (cat) => cat.label === project.category,
+                );
+                const projCategorySlug = projCategoryConfig?.id || "";
+                const projUrl = `/obras/${projCategorySlug}/${projSlug}`;
 
                 return (
                   <button
                     key={project.id}
-                    onClick={() => {
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
                       trackEvent("portfolio_project_click", {
                         project_id: project.id,
                         project_category: project.category,
@@ -394,6 +420,7 @@ export default function PortfolioDetail({
 
           <div className="text-center">
             <button
+              type="button"
               onClick={() => {
                 trackEvent("portfolio_view_all_click", {
                   source: "portfolio_detail",

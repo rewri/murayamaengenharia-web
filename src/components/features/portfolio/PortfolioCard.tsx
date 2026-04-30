@@ -1,6 +1,9 @@
 import { MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { generateConstructionSlug } from "../../../config/portfolio";
+import {
+  generateConstructionSlug,
+  portfolioCategories,
+} from "../../../config/portfolio";
 import { trackEvent } from "../../../lib/analytics";
 
 interface PortfolioCardProps {
@@ -20,11 +23,10 @@ export default function PortfolioCard({
 }: PortfolioCardProps) {
   const navigate = useNavigate();
   const projectSlug = generateConstructionSlug(title);
-  const categorySlug = category
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/\s+/g, "-");
+  const categoryConfig = portfolioCategories.find(
+    (cat) => cat.label === category,
+  );
+  const categorySlug = categoryConfig?.id || "";
   const url = `/obras/${categorySlug}/${projectSlug}`;
 
   const handleClick = () => {

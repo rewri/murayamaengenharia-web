@@ -10,6 +10,7 @@ export const parqueDasCascatas = [
     client: "Castro",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    video: null,
   },
   {
     id: "parqueDasCascatas-2",
@@ -22,6 +23,7 @@ export const parqueDasCascatas = [
     client: "Sacamone",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    video: null,
   },
   {
     id: "parqueDasCascatas-3",
@@ -34,5 +36,6 @@ export const parqueDasCascatas = [
     client: "Zillo",
     conclusion_year: 2026,
     services: ["Projeto", "Gerenciamento", "Acompanhamento"],
+    video: null,
   },
 ];

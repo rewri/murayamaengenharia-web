@@ -109,15 +109,37 @@ const HeroSection: React.FC = () => {
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
-      const handleLoadedData = () => {
+      console.log("[HeroSection] Setup video listeners, mobile:", isMobile);
+      const sources = Array.from(video.querySelectorAll("source")).map((s) =>
+        s.getAttribute("src"),
+      );
+      console.log("[HeroSection] Sources renderizadas:", sources);
+
+      const handleCanPlay = () => {
+        console.log("[HeroSection] canplay event disparado");
         setVideoLoaded(true);
         video.play().catch((error) => {
-          console.error("Erro ao reproduzir vídeo:", error);
+          console.error("[HeroSection] Erro ao reproduzir vídeo:", error);
         });
       };
-      video.addEventListener("loadeddata", handleLoadedData);
+
+      const handleLoadedMetadata = () => {
+        console.log("[HeroSection] loadedmetadata event disparado");
+      };
+
+      const handlePlaying = () => {
+        console.log("[HeroSection] playing event disparado");
+        setVideoLoaded(true);
+      };
+
+      video.addEventListener("canplay", handleCanPlay);
+      video.addEventListener("loadedmetadata", handleLoadedMetadata);
+      video.addEventListener("playing", handlePlaying);
+
       return () => {
-        video.removeEventListener("loadeddata", handleLoadedData);
+        video.removeEventListener("canplay", handleCanPlay);
+        video.removeEventListener("loadedmetadata", handleLoadedMetadata);
+        video.removeEventListener("playing", handlePlaying);
       };
     }
   }, [isMobile]);
@@ -125,7 +147,18 @@ const HeroSection: React.FC = () => {
   const handleVideoError = (
     event: React.SyntheticEvent<HTMLVideoElement, Event>,
   ): void => {
-    console.warn("Erro ao carregar vídeo:", event);
+    const sourceElement = event.target as HTMLSourceElement;
+    const src = sourceElement?.src;
+    console.warn("[HeroSection] Erro ao carregar source:", src);
+    console.log("[HeroSection] Tentou carregar:", src);
+    console.log(
+      "[HeroSection] Video error - Network state:",
+      videoRef.current?.networkState,
+    );
+    console.log(
+      "[HeroSection] Video error - Ready state:",
+      videoRef.current?.readyState,
+    );
     setVideoLoaded(false);
   };
 
@@ -161,7 +194,7 @@ const HeroSection: React.FC = () => {
           loop
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
           poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Cpath fill='%230A2B42' d='M0 0h1200v600H0z'/%3E%3C/svg%3E"
           className={`w-full h-full object-cover transition-opacity duration-500 ease-in-out ${
             videoLoaded ? "opacity-100" : "opacity-0"
@@ -169,12 +202,18 @@ const HeroSection: React.FC = () => {
           onError={handleVideoError}
         >
           {isMobile ? (
-            <source src="/static/videos/video-mobile.mp4" type="video/mp4" />
+            <source
+              src="/static/videos/video-mobile.mp4?v=20260430"
+              type="video/mp4"
+            />
           ) : (
             <>
-              <source src="/static/videos/video-desktop.mp4" type="video/mp4" />
               <source
-                src="/static/videos/video-original.mp4"
+                src="/static/videos/video-desktop.mp4?v=20260430"
+                type="video/mp4"
+              />
+              <source
+                src="/static/videos/video-original.mp4?v=20260430"
                 type="video/mp4"
               />
             </>
