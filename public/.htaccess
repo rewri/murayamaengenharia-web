@@ -66,8 +66,8 @@
   ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
   ExpiresByType image/svg+xml "access plus 1 year"
   
-  # HTML (30 minutos)
-  ExpiresByType text/html "access plus 30 minutes"
+  # HTML (sem cache - SPA precisa sempre do index.html mais recente)
+  ExpiresByType text/html "access plus 0 seconds"
   
   # Padrão
   ExpiresDefault "access plus 2 days"
@@ -105,4 +105,11 @@
   Header set X-Content-Type-Options "nosniff"
   Header set X-Frame-Options "SAMEORIGIN"
   Header set X-XSS-Protection "1; mode=block"
+
+  # Forçar no-cache para index.html
+  <FilesMatch "^index\.html$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
 </IfModule>

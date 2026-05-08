@@ -17,9 +17,10 @@ export function initGA() {
     window.dataLayer?.push(args);
   };
 
-  window.gtag("js", new Date().toISOString());
+  window.gtag("js", new Date());
   window.gtag("config", GA_ID, {
     send_page_view: false,
+    cookie_domain: "auto",
   });
 }
 

@@ -44,8 +44,8 @@ const subtitleTexts = [
 ];
 
 const statsData = [
-  { value: 150, label: "Obras" },
-  { value: 10, label: "Anos" },
+  { value: 250, label: "Obras" },
+  { value: 15, label: "Anos" },
   { value: 100, label: "Satisfação", suffix: "%" },
 ];
 
